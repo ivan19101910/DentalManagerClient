@@ -1,0 +1,95 @@
+
+.header {
+  height: 100px;
+  background: #433633;
+  width: 100%;
+}
+//.menu{
+//  text-align: right;
+//  display: table-cell;
+//  //margin-left: 40%;
+//  height: 100%;
+//  width: 100%;
+//  vertical-align: middle;
+//}
+//.header-element{
+//  color: white;
+//  vertical-align: middle;
+//  height: 100%;
+//  width: 100%;
+//  //display: inline-block;
+//}
+//.container{
+//  height: 100px;
+//  width: 100%;
+//
+//}
+//.menu-item{
+//  display: inline-block;
+//  font-size: 36px;
+//  margin: 10px;
+//  height: 100%;
+//  vertical-align: middle;
+//  text-align: center;
+//}
+//.menu-list{
+//  display: block;
+//  height: 100%;
+//  vertical-align: middle;
+//  text-align: center;
+//}
+//.icon{
+//  //display: inline;
+//}
+//.icon.img{
+//  //display: inline;
+//}
+//.navbar-div{
+//  display: table-cell;
+//  font-size: 48px;
+//  height: 100px;
+//  //text-align: center;
+//  //vertical-align: middle;
+//
+//}
+//.navbar-name{
+//  display: block;
+//  text-align: center;
+//  height: 100%;
+//  margin: 0 0 0 20px;
+//}
+//
+.container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height:100%;
+  color: white;
+  overflow: hidden;//need to rework(or no?)
+  //align-items: baseline;
+  //justify-content: flex-end;
+  //width:100%;
+}
+.list{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width:100%;
+}
+.el{
+  display: flex;
+  font-size: 36px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.name{
+  align-items: center;
+  //margin-bottom: 12px;
+  margin-left: 20px;
+  //text-align: center;
+  display:flex;
+  //display:inline;
+  height: 100%;
+  font-size: 48px;
+}

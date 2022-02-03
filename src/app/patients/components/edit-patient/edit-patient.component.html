@@ -1,0 +1,188 @@
+<!--<div *ngIf="form; else loader">-->
+<!--  <form class="card" [formGroup]="form" (ngSubmit)="submit()">-->
+<!--    <h2>Редагування пацієнта</h2>-->
+<!--    <div-->
+<!--      class="form-control"-->
+<!--      [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"-->
+<!--    >-->
+<!--      <label for="name">Ім'я:</label>-->
+<!--      <input id="name" type="text" formControlName="name">-->
+<!--      <div-->
+<!--        *ngIf="form.get('name')?.touched && form.get('name')?.invalid"-->
+<!--        class="validation"-->
+<!--      >-->
+<!--        <small *ngIf="form.get('name')?.errors?.['name']">-->
+<!--          Введіть поле ім'я-->
+<!--        </small>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div-->
+<!--      class="form-control"-->
+<!--      [ngClass]="{invalid: form.get('lastName')?.touched && form.get('lastName')?.invalid}"-->
+<!--    >-->
+<!--      <label for="lastName">Прізвище:</label>-->
+<!--      <input id="lastName" type="text" formControlName="lastName">-->
+<!--&lt;!&ndash;      <div&ndash;&gt;-->
+<!--&lt;!&ndash;        *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid"&ndash;&gt;-->
+<!--&lt;!&ndash;        class="validation"&ndash;&gt;-->
+<!--&lt;!&ndash;      >&ndash;&gt;-->
+<!--        <div-->
+<!--          *ngIf="form.get('lastName')?.invalid"-->
+<!--          class="validation"-->
+<!--        >-->
+<!--        <small *ngIf="form.get('lastName')?.errors?.['required']">-->
+<!--          Введіть поле прізвище-->
+<!--        </small>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div-->
+<!--      class="form-control"-->
+<!--      [ngClass]="{invalid: form.get('address')?.touched && form.get('address')!.invalid}"-->
+<!--    >-->
+<!--      <label for="address">Адреса:</label>-->
+<!--      <input id="address" type="text" formControlName="address">-->
+<!--      <div-->
+<!--        *ngIf="form.get('address')!.touched! && form.get('address')!.invalid"-->
+<!--        class="validation"-->
+<!--      >-->
+<!--        <small *ngIf="form.get('address')!.errors?.['address']">-->
+<!--          Введіть поле адреса-->
+<!--        </small>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div-->
+<!--      class="form-control"-->
+<!--      [ngClass]="{invalid: form.get('phoneNumber')?.touched && form.get('phoneNumber')!.invalid}"-->
+<!--    >-->
+<!--      <label for="phoneNumber">Номер:</label>-->
+<!--      <input id="phoneNumber" type="text" formControlName="phoneNumber">-->
+<!--      <div-->
+<!--        *ngIf="form.get('phoneNumber')!.touched! && form.get('phoneNumber')!.invalid"-->
+<!--        class="validation"-->
+<!--      >-->
+<!--        <small *ngIf="form.get('phoneNumber')!.errors?.['phoneNumber']">-->
+<!--          Введіть поле номер-->
+<!--        </small>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div-->
+<!--      class="form-control"-->
+<!--      [ngClass]="{invalid: form.get('date')?.touched && form.get('date')!.invalid}"-->
+<!--    >-->
+<!--      <label for="date">Дата народження:</label>-->
+<!--      <input id="date" type="date" formControlName="date">-->
+<!--      <div-->
+<!--        *ngIf="form.get('date')!.touched! && form.get('date')!.invalid"-->
+<!--        class="validation"-->
+<!--      >-->
+<!--        <small *ngIf="form.get('date')!.errors?.['date']">-->
+<!--          Введіть поле дата народження-->
+<!--        </small>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <button-->
+<!--      type="submit"-->
+<!--      class="btn btn-submit"-->
+<!--      [disabled]="form.invalid || submitted"-->
+<!--    >Зберегти</button>-->
+<!--  </form>-->
+<!--</div>-->
+
+<div class="form-wrapper" *ngIf="form; else loader">
+  <form class="card" [formGroup]="form" (ngSubmit)="submit()" >
+    <div class ="form-header">
+      <h2>Редагування пацієнта</h2>
+      <svg [routerLink]="['/patients']"
+        class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z" fill="rgba(53,48,47,1)"/></svg>
+    </div>
+        <div
+          class="form-control"
+          [ngClass]="{invalid: form.get('name')?.touched && form.get('name')!.invalid}"
+        >
+          <label for="name" class="form-label">Ім'я:</label>
+          <input class="form-input" id="name" type="text" formControlName="name">
+          <div
+            *ngIf="form.get('name')!.touched! && form.get('name')!.invalid"
+            class="validation"
+          >
+            <small *ngIf="form.get('name')?.errors?.['required']">
+              Введіть поле ім'я
+            </small>
+          </div>
+        </div>
+        <div
+          class="form-control"
+          [ngClass]="{invalid: form.get('lastName')?.touched && form.get('lastName')!.invalid}"
+        >
+          <label for="lastName" class="form-label">Прізвище:</label>
+          <input class="form-input" id="lastName" type="text" formControlName="lastName">
+          <div
+            *ngIf="form.get('lastName')!.touched! && form.get('lastName')!.invalid"
+            class="validation"
+          >
+                    <small *ngIf="form.get('lastName')?.errors?.['required']">
+                      Введіть поле прізвище
+                    </small>
+          </div>
+        </div>
+        <div
+          class="form-control"
+          [ngClass]="{invalid: form.get('address')?.touched && form.get('address')!.invalid}"
+        >
+          <label for="address" class="form-label">Адреса:</label>
+          <input class="form-input" id="address" type="text" formControlName="address">
+          <div
+            *ngIf="form.get('address')!.touched! && form.get('address')!.invalid"
+            class="validation"
+          >
+            <small *ngIf="form.get('address')!.errors?.['required']">
+              Введіть поле адреса
+            </small>
+          </div>
+        </div>
+        <div
+          class="form-control"
+          [ngClass]="{invalid: form.get('phoneNumber')?.touched && form.get('phoneNumber')!.invalid}"
+        >
+          <label for="phoneNumber" class="form-label">Номер:</label>
+          <input class="form-input" id="phoneNumber" type="text" formControlName="phoneNumber">
+          <div
+            *ngIf="form.get('phoneNumber')!.touched! && form.get('phoneNumber')!.invalid"
+            class="validation"
+          >
+            <small *ngIf="form.get('phoneNumber')!.errors?.['required']">
+              Введіть поле номер
+            </small>
+          </div>
+        </div>
+        <div
+            class="form-control"
+            [ngClass]="{invalid: form.get('date')?.touched && form.get('date')!.invalid}"
+          >
+            <label for="date" class="form-label">Дата народження:</label>
+            <input class="form-input" id="date" type="date" formControlName="date">
+            <div
+              *ngIf="form.get('date')!.touched! && form.get('date')!.invalid"
+              class="validation"
+            >
+              <small *ngIf="form.get('date')!.errors?.['date']">
+                Введіть поле дата народження
+              </small>
+            </div>
+          </div>
+    <div class="button-section">
+      <button
+        type="submit"
+        class="form-submit-btn"
+        [disabled]="form.invalid || submitted"
+      >Зберегти</button>
+    </div>
+
+  </form>
+</div>
+
+<ng-template #loader>
+  <p class="text-center">Завантаження...</p>
+</ng-template>
