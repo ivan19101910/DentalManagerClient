@@ -1,55 +1,5 @@
-<!--<div *ngIf="patients ; else loader">-->
-<!--&lt;!&ndash;  <div class="form-control">&ndash;&gt;-->
-<!--&lt;!&ndash;    <input type="text" placeholder="Знайти пацієнта...">&ndash;&gt;-->
-<!--&lt;!&ndash;  </div>&ndash;&gt;-->
-<!--  <table>-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--      <th>Ім'я</th>-->
-<!--      <th>Прізвище</th>-->
-<!--      <th>Номер</th>-->
-<!--      <th>Дата народження</th>-->
-<!--      <th>Адреса</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr *ngFor="let patient of patients">-->
-<!--      <td>{{patient.firstName}}</td>-->
-<!--      <td>{{patient.lastName}}</td>-->
-<!--      <td>{{patient.phoneNumber}}</td>-->
-<!--      <td>{{patient.dateOfBirth | date:'dd/MM/yyyy'}}</td>-->
-<!--      <td>{{patient.address}}</td>-->
-<!--      <td>-->
-<!--        <button-->
-<!--          class="btn btn-click"-->
-<!--          [routerLink]="['/patients', 'edit', patient.id]"-->
-<!--        >-->
-<!--          Редагувати-->
-<!--        </button>-->
-<!--        <button (click)="remove(patient.id)">Видалити</button>-->
-<!--      </td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
-<!--</div>-->
-
-<!--<ng-template #loader>-->
-<!--  <p class="text-center">Завантаження...</p>-->
-<!--</ng-template>-->
-
-<!--<div class="patient-card">-->
-<!--  <div class="patient-el">Іван</div>-->
-<!--  <div class="patient-el">Райковський</div>-->
-<!--  <div class="patient-el">19/10/2000</div>-->
-<!--  <div class="patient-el"></div>-->
-<!--</div>-->
-
-
 <div class="show-wrapper">
   <div *ngIf="patients; else loader" class="patient-all">
-    <!--  <div class="form-control">-->
-    <!--    <input type="text" placeholder="Знайти пацієнта...">-->
-    <!--  </div>-->
     <table class="patient-table">
       <thead>
       <tr>

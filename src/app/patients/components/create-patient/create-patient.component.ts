@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../shared/services/auth.service";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Patient, User} from "../../../shared/interfaces";
 import {tap} from "rxjs/operators";
-import {catchError} from "rxjs";
+import {catchError, Subscription} from "rxjs";
 import {environment} from "../../../../environments/environment";
 
 @Component({
@@ -13,9 +13,11 @@ import {environment} from "../../../../environments/environment";
   templateUrl: './create-patient.component.html',
   styleUrls: ['./create-patient.component.scss']
 })
-export class CreatePatientComponent implements OnInit {
+export class CreatePatientComponent implements OnInit{
   form: FormGroup
   submitted = false
+
+
 
   constructor(
     public auth: AuthService,
@@ -36,8 +38,6 @@ export class CreatePatientComponent implements OnInit {
   }
 
   submit() {
-    console.log("submitted")
-
     const patient: Patient = {
       id: 0,
       firstName: this.form.value.name,
@@ -55,8 +55,5 @@ export class CreatePatientComponent implements OnInit {
 
     })
 
-    console.log(response)
   }
-
-
 }

@@ -1,25 +1,11 @@
-//.patient-card{
-//  width: 90%;
-//  border: solid #35302F;
-//  display: flex;
-//  flex-direction: row;
-//}
-//.patient-el{
-//
-//}
 
 .patient-table{
-  //width: 90%;
   color: #35302F;
-  //height: 70%;
-
 }
 
 .patient-all{
   display: flex;
   justify-content: center;
-  //height: 90%;
-  //margin-top: 30px;
 
   align-items: stretch;//
   flex-direction: column;//this 2 prop for stretching table, remove if unnecessary
@@ -35,13 +21,11 @@
   flex-basis: auto;
 }
 .patient-el{
-  //text-align: center;
   flex: 1 1 auto;
   font-size: 18px;
   height:40px;
 }
 .patient-el-header{
-  //text-align: center;
   font-size: 18px;
   height:40px;
 }
@@ -63,7 +47,6 @@ td{
   min-width: 160px;
   font-size: 18px;
   color: #35302F;
-  //margin: 5px;
   margin: 30px 0 0 30px;
   text-align: center;
   text-justify: auto;

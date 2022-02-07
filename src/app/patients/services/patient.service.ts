@@ -1,8 +1,7 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {catchError, Observable, Subject, throwError} from "rxjs";
-import {tap} from "rxjs/operators"
-import {Patient, User} from "../../shared/interfaces";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {Patient} from "../../shared/interfaces";
 import {environment} from "../../../environments/environment";
 
 @Injectable({ providedIn: 'root' })

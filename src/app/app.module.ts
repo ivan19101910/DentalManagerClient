@@ -17,6 +17,10 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/auth.interceptor";
 import { EditPatientComponent } from './patients/components/edit-patient/edit-patient.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import { ServicesComponent } from './services/services.component';
+import { ShowServicesComponent } from './services/show-services/show-services.component';
+import { EditServiceComponent } from './services/edit-service/edit-service.component';
+import { CreateServiceComponent } from './services/create-service/create-service.component';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -35,7 +39,11 @@ const INTERCEPTOR_PROVIDER: Provider = {
     PatientComponent,
     CreatePatientComponent,
     ShowPatientsComponent,
-    EditPatientComponent
+    EditPatientComponent,
+    ServicesComponent,
+    ShowServicesComponent,
+    EditServiceComponent,
+    CreateServiceComponent
   ],
     imports: [
         BrowserModule,

@@ -8,6 +8,10 @@ import {AuthGuard} from "./shared/services/auth.guard";
 import {CreatePatientComponent} from "./patients/components/create-patient/create-patient.component";
 import {ShowPatientsComponent} from "./patients/components/show-patients/show-patients.component";
 import {EditPatientComponent} from "./patients/components/edit-patient/edit-patient.component";
+import {ServicesComponent} from "./services/services.component";
+import {ShowServicesComponent} from "./services/show-services/show-services.component";
+import {CreateServiceComponent} from "./services/create-service/create-service.component";
+import {EditServiceComponent} from "./services/edit-service/edit-service.component";
 
 const routes: Routes = [
   {
@@ -28,7 +32,12 @@ const routes: Routes = [
     ]
   },
   {
-    path: "create", component: CreatePatientComponent, canActivate:[AuthGuard]
+    path: "services", component: ServicesComponent, canActivate:[AuthGuard], children: [
+      {path: '', component: ShowServicesComponent, canActivate:[AuthGuard]},
+      {path: 'create', component: CreateServiceComponent, canActivate:[AuthGuard]},
+      {path: 'getAll', component: ShowServicesComponent, canActivate:[AuthGuard]},
+      {path: 'edit/:id', component: EditServiceComponent, canActivate:[AuthGuard]}
+    ]
   }
 
 
