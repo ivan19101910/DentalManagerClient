@@ -1,0 +1,76 @@
+<div class="form-wrapper" *ngIf="form; else loader">
+  <form class="card" [formGroup]="form" (ngSubmit)="submit()" >
+    <div class ="form-header">
+      <h2>Створення послуги</h2>
+      <svg [routerLink]="['/services']"
+           class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z" fill="rgba(53,48,47,1)"/></svg>
+    </div>
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
+    >
+      <label for="name" class="form-label">Назва:</label>
+      <input class="form-input" id="name" type="text" formControlName="name">
+      <div
+        *ngIf="form.get('name')?.touched! && form.get('name')?.invalid"
+        class="validation"
+      >
+        <small *ngIf="form.get('name')?.errors?.['required']">
+          Введіть поле ім'я
+        </small>
+      </div>
+    </div>
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('type')?.touched && form.get('type')!.invalid}"
+    >
+      <label for="type" class="form-label">Тип:</label>
+      <select class="form-input" id="type" formControlName="type">
+        <option *ngFor="let type of serviceTypes">{{type.name}}</option>
+      </select>
+      <div
+        *ngIf="form.get('type')!.touched! && form.get('type')!.invalid"
+        class="validation"
+      >
+        <small *ngIf="form.get('type')?.errors?.['required']">
+          Введіть поле тип
+        </small>
+      </div>
+    </div>
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('price')?.touched && form.get('price')!.invalid}"
+    >
+      <label for="price" class="form-label">Ціна:</label>
+      <input class="form-input" id="price" type="number" formControlName="price">
+      <div
+        *ngIf="form.get('price')!.touched! && form.get('price')!.invalid"
+        class="validation"
+      >
+        <small *ngIf="form.get('price')!.errors?.['required']">
+          Введіть поле ціна
+        </small>
+      </div>
+    </div>
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('description')?.touched && form.get('description')!.invalid}"
+    >
+      <label for="description" class="form-label">Опис:</label>
+      <input class="form-input" id="description" type="text" formControlName="description">
+    </div>
+
+    <div class="button-section">
+      <button
+        type="submit"
+        class="form-submit-btn"
+        [disabled]="form.invalid || submitted"
+      >Створити</button>
+    </div>
+
+  </form>
+</div>
+
+<ng-template #loader>
+  <p class="text-center">Завантаження...</p>
+</ng-template>

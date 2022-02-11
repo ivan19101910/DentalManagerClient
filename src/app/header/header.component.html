@@ -1,38 +1,16 @@
 <div class="header">
-<!--  <button (click)="auth.logout()" >Вийти у вікно</button>-->
-<!--  <nav class="header-element">-->
-<!--    <div class="container">-->
-<!--      <div class="navbar-div">-->
-<!--        <a class="navbar-name">-->
-<!--          DentaLManager-->
-<!--        </a>-->
-<!--      </div>-->
-<!--      <div class="menu">-->
-<!--        <ul class="menu-list">-->
-<!--          <li class="menu-item">Послуги</li>-->
-<!--          <li class="menu-item">Пацієнти</li>-->
-<!--          <li class="menu-item">Прийоми</li>-->
-<!--          <li class="menu-item">Працівники</li>-->
-<!--          <li class="menu-item">-->
-<!--            <img alt="user" src="../../assets/usericon.png">-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </nav>-->
-<!--  <button (click)="auth.logout()" >Вийти у вікно</button>-->
   <div class="container">
     <div class="name">DentalManager</div>
       <div class="list">
         <div class="el" [routerLink]="['/services']">Послуги</div>
         <div class="el" [routerLink]="['/patients']">Пацієнти</div>
-        <div class="el">Прийоми</div>
-        <div class="el">Працівники</div>
+        <div class="el" [routerLink]="['/appointments']">Прийоми</div>
+        <div class="el" [routerLink]="['/workers']">Працівники</div>
         <div class="el">
-<!--          <img alt="user" src="../../assets/usericon.png">-->
-          <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3zm-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228z"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3zm-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228z"></path></svg>
         </div>
       </div>
   </div>
-</div>
 
+</div>
+<!--<button (click)="auth.logout()">BATON</button>-->

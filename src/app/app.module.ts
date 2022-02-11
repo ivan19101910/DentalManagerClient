@@ -21,6 +21,13 @@ import { ServicesComponent } from './services/services.component';
 import { ShowServicesComponent } from './services/show-services/show-services.component';
 import { EditServiceComponent } from './services/edit-service/edit-service.component';
 import { CreateServiceComponent } from './services/create-service/create-service.component';
+import { CreateWorkerComponent } from './workers/create-worker/create-worker.component';
+import { EditWorkerComponent } from './workers/edit-worker/edit-worker.component';
+import { ShowWorkerComponent } from './workers/show-worker/show-worker.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
+import { ShowAppointmentsComponent } from './appointments/show-appointments/show-appointments.component';
+import { CreateAppointmentComponent } from './appointments/create-appointment/create-appointment.component';
+import { EditAppointmentComponent } from './appointments/edit-appointment/edit-appointment.component';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -43,7 +50,14 @@ const INTERCEPTOR_PROVIDER: Provider = {
     ServicesComponent,
     ShowServicesComponent,
     EditServiceComponent,
-    CreateServiceComponent
+    CreateServiceComponent,
+    CreateWorkerComponent,
+    EditWorkerComponent,
+    ShowWorkerComponent,
+    AppointmentsComponent,
+    ShowAppointmentsComponent,
+    CreateAppointmentComponent,
+    EditAppointmentComponent
   ],
     imports: [
         BrowserModule,

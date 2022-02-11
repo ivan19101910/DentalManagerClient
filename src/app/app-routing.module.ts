@@ -12,6 +12,13 @@ import {ServicesComponent} from "./services/services.component";
 import {ShowServicesComponent} from "./services/show-services/show-services.component";
 import {CreateServiceComponent} from "./services/create-service/create-service.component";
 import {EditServiceComponent} from "./services/edit-service/edit-service.component";
+import {ShowWorkerComponent} from "./workers/show-worker/show-worker.component";
+import {CreateWorkerComponent} from "./workers/create-worker/create-worker.component";
+import {EditWorkerComponent} from "./workers/edit-worker/edit-worker.component";
+import {AppointmentsComponent} from "./appointments/appointments.component";
+import {ShowAppointmentsComponent} from "./appointments/show-appointments/show-appointments.component";
+import {CreateAppointmentComponent} from "./appointments/create-appointment/create-appointment.component";
+import {EditAppointmentComponent} from "./appointments/edit-appointment/edit-appointment.component";
 
 const routes: Routes = [
   {
@@ -21,7 +28,12 @@ const routes: Routes = [
     path: "", component: HomeComponent, canActivate:[AuthGuard]
   },
   {
-    path: "workers", component: WorkersComponent, canActivate:[AuthGuard]
+    path: "workers", component: WorkersComponent, canActivate:[AuthGuard], children: [
+      {path: '', component: ShowWorkerComponent, canActivate:[AuthGuard]},
+      {path: 'create', component: CreateWorkerComponent, canActivate:[AuthGuard]},
+      {path: 'getAll', component: ShowWorkerComponent, canActivate:[AuthGuard]},
+      {path: 'edit/:id', component: EditWorkerComponent, canActivate:[AuthGuard]}
+    ]
   },
   {
     path: "patients", component: PatientsComponent, canActivate:[AuthGuard], children: [
@@ -37,6 +49,14 @@ const routes: Routes = [
       {path: 'create', component: CreateServiceComponent, canActivate:[AuthGuard]},
       {path: 'getAll', component: ShowServicesComponent, canActivate:[AuthGuard]},
       {path: 'edit/:id', component: EditServiceComponent, canActivate:[AuthGuard]}
+    ]
+  },
+  {
+    path: "appointments", component: AppointmentsComponent, canActivate:[AuthGuard], children: [
+      {path: '', component: ShowAppointmentsComponent, canActivate:[AuthGuard]},
+      {path: 'create', component: CreateAppointmentComponent, canActivate:[AuthGuard]},
+      {path: 'getAll', component: ShowAppointmentsComponent, canActivate:[AuthGuard]},
+      {path: 'edit/:id', component: EditAppointmentComponent, canActivate:[AuthGuard]}
     ]
   }
 
