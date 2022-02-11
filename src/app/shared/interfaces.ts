@@ -113,3 +113,6 @@ export interface AppointmentServiceCreate{
   serviceId: number
   amount: number
 }
+export interface AppointmentFull{
+
+}

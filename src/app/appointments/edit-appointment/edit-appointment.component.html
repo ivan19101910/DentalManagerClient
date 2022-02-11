@@ -1,1 +1,178 @@
-<p>edit-appointment works!</p>
+<div class="form-wrapper" *ngIf="form; else loader">
+  <form class="card" [formGroup]="form" (ngSubmit)="submit()" >
+    <div class ="form-header">
+      <h2>Редагування прийому</h2>
+      <svg [routerLink]="['/appointments']"
+           class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z" fill="rgba(53,48,47,1)"/></svg>
+    </div>
+
+    <div class="form-horizontal-group">
+      <div
+        class="form-control"
+        [ngClass]="{invalid: form.get('appointmentDate')?.touched && form.get('appointmentDate')!.invalid}"
+      >
+        <label for="appointmentDate" class="form-label">Дата прийому:</label>
+        <input class="form-input" id="appointmentDate" type="date" formControlName="appointmentDate">
+        <div
+          *ngIf="form.get('appointmentDate')!.touched! && form.get('appointmentDate')!.invalid"
+          class="validation"
+        >
+          <small *ngIf="form.get('appointmentDate')!.errors?.['required']">
+            Введіть поле дата прийому
+          </small>
+        </div>
+      </div>
+      <div
+        class="form-control"
+        [ngClass]="{invalid: form.get('appointmentTime')?.touched && form.get('appointmentTime')!.invalid}"
+      >
+        <label for="appointmentTime" class="form-label">Час прийому:</label>
+        <input class="form-input" id="appointmentTime" type="time" formControlName="appointmentTime">
+        <div
+          *ngIf="form.get('appointmentTime')!.touched! && form.get('appointmentTime')!.invalid"
+          class="validation"
+        >
+          <small *ngIf="form.get('appointmentTime')!.errors?.['required']">
+            Введіть поле час прийому
+          </small>
+        </div>
+      </div>
+      <div
+        class="form-control"
+        [ngClass]="{invalid: form.get('appointmentEndTime')?.touched && form.get('appointmentEndTime')!.invalid}"
+      >
+        <label for="appointmentEndTime" class="form-label">Час кінця прийому:</label>
+        <input class="form-input" id="appointmentEndTime" type="time" formControlName="appointmentEndTime">
+
+      </div>
+    </div>
+
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('notes')?.touched && form.get('notes')!.invalid}"
+    >
+      <label for="notes" class="form-label">Примітки:</label>
+      <input class="form-input" id="notes" type="text" formControlName="notes">
+    </div>
+    <div class="form-horizontal-group">
+      <div
+        class="form-control"
+        [ngClass]="{invalid: form.get('worker')?.touched && form.get('worker')!.invalid}"
+      >
+        <label for="worker" class="form-label">Працівник:</label>
+
+        <select class="form-input" id="worker" formControlName="worker" [(ngModel)]="workerId">
+          <option [ngValue]="null" disabled>Оберіть працівника</option>
+          <option *ngFor="let worker of workers" [ngValue]="worker.id">
+            {{worker.firstName}} {{worker.lastName}} {{worker.positionName}}
+          </option>
+        </select>
+      </div>
+      <div
+        class="form-control"
+        [ngClass]="{invalid: form.get('patient')?.touched && form.get('patient')!.invalid}"
+      >
+        <label for="patient" class="form-label">Пацієнт:</label>
+
+        <select class="form-input" id="patient" formControlName="patient" [(ngModel)]="patientId">
+          <option [ngValue]="null" disabled>Оберіть пацієнта</option>
+          <option *ngFor="let patient of patients" [ngValue]="patient.id">
+            {{patient.firstName}} {{patient.lastName}} {{patient.phoneNumber}}
+          </option>
+        </select>
+
+      </div>
+    </div>
+
+    <div class="show-wrapper">
+      <div *ngIf="services; else loader" class="services-all">
+        <table class="service-table">
+          <thead>
+          <tr>
+            <th class="service-el-header">Послуга</th>
+            <th class="service-el-header">Ціна</th>
+            <th class="service-el-header">К-сть</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let appointmentService of appointmentServices | paginate: { itemsPerPage: 5, currentPage: page}">
+            <td class="service-el">{{appointmentService.serviceName}}</td>
+            <td class="service-el">{{appointmentService.servicePrice}}</td>
+            <td class="service-el">{{appointmentService.amount}}</td>
+            <td class="action-section">
+              <svg class="delete-icon" viewBox="0 0 24 24" width="32" height="32" ><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-4.586 6l1.768 1.768-1.414 1.414L12 15.414l-1.768 1.768-1.414-1.414L10.586 14l-1.768-1.768 1.414-1.414L12 12.586l1.768-1.768 1.414 1.414L13.414 14zM9 4v2h6V4H9z" fill="rgba(53,48,47,1)"/></svg>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+      <div class="bottom-section">
+        <div class="create-button" (click)="addAppointmentService()">
+          Додати послугу</div>
+        <pagination-controls class="pagination-controls" previousLabel=""
+                             nextLabel=""
+                             (pageChange)="page = $event"></pagination-controls>
+      </div>
+    </div>
+
+    <div class="form-horizontal-group">
+      <div
+        class="form-control"
+        [ngClass]="{invalid: form.get('serviceType')?.touched && form.get('serviceType')!.invalid}"
+      >
+        <label for="serviceType" class="form-label">Тип:</label>
+
+        <select class="form-input" id="serviceType" formControlName="serviceType">
+          <option [ngValue]="null" disabled>Оберіть тип</option>
+          <option *ngFor="let serviceType of serviceTypes">{{serviceType.name}}</option>
+        </select>
+
+      </div>
+      <div
+        class="form-control"
+        [ngClass]="{invalid: form.get('service')?.touched && form.get('service')!.invalid}"
+      >
+        <label for="service" class="form-label">Послуга:</label>
+
+        <select class="form-input" id="service" formControlName="service">
+          <option [ngValue]="null" disabled>Оберіть сервіс</option>
+          <option *ngFor="let service of services">{{service.name}}</option>
+        </select>
+
+      </div>
+      <div
+        class="form-control"
+        [ngClass]="{invalid: form.get('amount')?.touched && form.get('amount')!.invalid}"
+      >
+        <label for="amount" class="form-label">К-сть:</label>
+        <input class="form-input" id="amount" type="number" formControlName="amount">
+
+      </div>
+    </div>
+
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('totalSum')?.touched && form.get('totalSum')!.invalid}"
+    >
+      <label for="totalSum" class="form-label">Сума за прийом:</label>
+      <input class="form-input" id="totalSum" type="number" formControlName="totalSum">
+    </div>
+    <div class="button-section">
+      <button
+        type="submit"
+        class="form-submit-btn"
+        [disabled]="form.invalid || submitted"
+      >Зберегти</button>
+    </div>
+
+  </form>
+</div>
+
+<ng-template #loader>
+  <p class="text-center">Завантаження...</p>
+</ng-template>
+<router-outlet></router-outlet>
+

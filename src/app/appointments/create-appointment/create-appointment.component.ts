@@ -131,45 +131,13 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
         totalSum: this.form.value.totalSum,
         appointmentServices: this.appointmentServices
     }
-    console.log(appointment)
-    const response : any = this.appointmentService.create(appointment).subscribe(() => {
+    this.appointmentService.create(appointment).subscribe(() => {
         this.form.reset()
         this.router.navigate(['/appointments'])
         this.submitted = false
-        // const r = this.appointmentService.createManyAppointmentServices(this.appointmentServices).subscribe(() => {
-        //   console.log(r)
-        // })
 
       })
 
-    //let typeServiceId = this.workers!.find(val => val.name == this.form.value.type)!.id
-
-    // const appointment: ShortAppointment = {
-    //   id: 0,
-    //   name: this.form.value.name,
-    //   serviceTypeName: this.form.value.type,
-    //   serviceTypeId: typeServiceId,
-    //   price: this.form.value.price,
-    //   description: this.form.value.description
-    // }
-
-    // const appointment: CreateAppointment = {
-    //   appointmentDate: 1,
-    //   notes: 1,
-    //   appointmentTime: 1,
-    //   realEndTime: 1,
-    //   workerId: 1,
-    //   patientId: 1,
-    //   statusId: 1,
-    //   totalSum: 1,
-    // }
-
-
-    // const response : any = this.http.post(`${environment.serverUrl}service/create`, appointment).subscribe(() => {
-    //   this.form.reset()
-    //   this.router.navigate(['/services'])
-    //   this.submitted = false
-    // })
   }
 
 }
