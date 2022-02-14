@@ -107,12 +107,41 @@ export interface CreateAppointment{
   totalSum: number
   appointmentServices: AppointmentServiceCreate[]
 }
+export interface EditAppointment{
+  id: number
+  appointmentDate: Date
+  notes: string
+  appointmentTime: Time
+  realEndTime: Time
+  workerId: number
+  patientId: number
+  statusId: number
+  totalSum: number
+  appointmentServices: AppointmentServiceCreate[]
+}
 export interface AppointmentServiceCreate{
   serviceName: string
   servicePrice: number
   serviceId: number
   amount: number
 }
+export interface AppointmentServiceEdit{
+  id: number
+  appointmentId : number
+  serviceName: string
+  servicePrice: number
+  serviceId: number
+  amount: number
+}
 export interface AppointmentFull{
-
+  id: number
+  appointmentDate: Date
+  notes: string
+  appointmentTime: Time
+  realEndTime: Time
+  workerId: number
+  patientId: number
+  statusId: number
+  totalSum: number
+  appointmentServices: AppointmentServiceEdit[]
 }

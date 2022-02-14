@@ -1,11 +1,10 @@
 import {Component, forwardRef, OnDestroy, OnInit, Provider} from '@angular/core';
-import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
+import {FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
 import {
-  AppointmentServiceCreate,
+  AppointmentServiceCreate, AppointmentServiceEdit,
   CreateAppointment, Patient,
   Service,
   ServiceType,
-  ShortAppointment,
   ShowWorker,
   WorkerFull
 } from "../../shared/interfaces";
@@ -14,10 +13,8 @@ import {AuthService} from "../../shared/services/auth.service";
 import {ServiceService} from "../../services/service.service";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
 import {AppointmentService} from "../appointment.service";
 import {WorkerService} from "../../workers/worker.service";
-import {Time} from "@angular/common";
 import {PatientService} from "../../patients/services/patient.service";
 
 const VALUE_ACCESSOR: Provider = {
@@ -39,6 +36,7 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
   workers?: ShowWorker[]
   workerAcc?: WorkerFull
   services?: Service[]
+  filteredServices?: Service[]
   serviceTypes?: ServiceType[]
   patients?: Patient[]
 
@@ -73,7 +71,7 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
       patient: new FormControl(null, Validators.required),
       serviceType: new FormControl(null),
       service: new FormControl(null),
-      amount: new FormControl(null)
+      amount: new FormControl(1,null)
     })
   }
 
@@ -81,6 +79,7 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
     this.tSub?.unsubscribe()
     this.sSub?.unsubscribe()
     this.pSub?.unsubscribe()
+    this.stSub?.unsubscribe()
   }
 
   ngOnInit(): void {
@@ -99,25 +98,42 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
     this.workerService.getById(+localStorage.getItem("id")!)
       .subscribe(worker =>{
         this.workerAcc = worker;
-        console.log(this.workerAcc);
+        //console.log(this.workerAcc);
     })
 
   }
-  addAppointmentService(){
+  addAppointmentService() {
     let serviceId = this.services!
       .find(val => val.name == this.form.value.service)!.id
     let price = this.services!
       .find(val => val.name == this.form.value.service)!.price
-    let appointmentService: AppointmentServiceCreate =
-      {
-        serviceName: this.form.value.service,
-        servicePrice: price,
-        serviceId: serviceId,
-        amount: this.form.value.amount
-      };
-    this.appointmentServices?.push(appointmentService)
 
-}
+    let existingAppointmentService = this.appointmentServices.filter(x => x.serviceName == this.form.value.service)[0]
+
+    if (existingAppointmentService) {
+      existingAppointmentService.amount += this.form.value.amount
+    } else {
+      let appointmentService: AppointmentServiceCreate =
+        {
+          serviceName: this.form.value.service,
+          servicePrice: price,
+          serviceId: serviceId,
+          amount: this.form.value.amount
+        };
+      this.appointmentServices?.push(appointmentService)
+    }
+
+  }
+
+  removeAppointmentService(appointmentService: AppointmentServiceCreate):  void{
+    const index = this.appointmentServices.indexOf(appointmentService)
+    this.appointmentServices.splice(index, 1)
+  }
+
+  filterServices(){
+    this.filteredServices = this.services?.filter(val => val.serviceTypeName == this.form.value.serviceType)
+  }
+
   submit() {
 
     const appointment: CreateAppointment ={

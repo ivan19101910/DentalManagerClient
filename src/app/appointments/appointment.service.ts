@@ -1,7 +1,13 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AppointmentServiceCreate, CreateAppointment, ShortAppointment} from "../shared/interfaces";
+import {
+  AppointmentFull,
+  AppointmentServiceCreate,
+  CreateAppointment,
+  EditAppointment,
+  ShortAppointment
+} from "../shared/interfaces";
 import {environment} from "../../environments/environment";
 
 @Injectable({ providedIn: 'root' })
@@ -18,12 +24,12 @@ export class AppointmentService{
     return this.http.delete<void>(`${environment.serverUrl}appointment/delete/${id}`)
   }
 
-  getById(id: number): Observable<ShortAppointment>{
-    return this.http.get<ShortAppointment>(`${environment.serverUrl}appointment/get-by-id/${id}`)
+  getById(id: number): Observable<AppointmentFull>{
+    return this.http.get<AppointmentFull>(`${environment.serverUrl}appointment/getById/${id}`)
   }
 
-  update(appointment: ShortAppointment): Observable<ShortAppointment>{
-    return this.http.put<ShortAppointment>(`${environment.serverUrl}appointment/update`, appointment)
+  update(appointment: EditAppointment): Observable<EditAppointment>{
+    return this.http.put<EditAppointment>(`${environment.serverUrl}appointment/update`, appointment)
   }
 
   create(appointment: CreateAppointment): Observable<any>{

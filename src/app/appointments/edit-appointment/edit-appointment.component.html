@@ -101,7 +101,7 @@
             <td class="service-el">{{appointmentService.servicePrice}}</td>
             <td class="service-el">{{appointmentService.amount}}</td>
             <td class="action-section">
-              <svg class="delete-icon" viewBox="0 0 24 24" width="32" height="32" ><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-4.586 6l1.768 1.768-1.414 1.414L12 15.414l-1.768 1.768-1.414-1.414L10.586 14l-1.768-1.768 1.414-1.414L12 12.586l1.768-1.768 1.414 1.414L13.414 14zM9 4v2h6V4H9z" fill="rgba(53,48,47,1)"/></svg>
+              <svg class="delete-icon" (click)="removeAppointmentService(appointmentService)" viewBox="0 0 24 24" width="32" height="32" ><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-4.586 6l1.768 1.768-1.414 1.414L12 15.414l-1.768 1.768-1.414-1.414L10.586 14l-1.768-1.768 1.414-1.414L12 12.586l1.768-1.768 1.414 1.414L13.414 14zM9 4v2h6V4H9z" fill="rgba(53,48,47,1)"/></svg>
             </td>
           </tr>
           </tbody>
@@ -125,7 +125,7 @@
       >
         <label for="serviceType" class="form-label">Тип:</label>
 
-        <select class="form-input" id="serviceType" formControlName="serviceType">
+        <select class="form-input" id="serviceType" formControlName="serviceType" (change)="filterServices()">
           <option [ngValue]="null" disabled>Оберіть тип</option>
           <option *ngFor="let serviceType of serviceTypes">{{serviceType.name}}</option>
         </select>
@@ -138,8 +138,8 @@
         <label for="service" class="form-label">Послуга:</label>
 
         <select class="form-input" id="service" formControlName="service">
-          <option [ngValue]="null" disabled>Оберіть сервіс</option>
-          <option *ngFor="let service of services">{{service.name}}</option>
+          <option [ngValue]="null" disabled>Оберіть послугу</option>
+          <option *ngFor="let service of filteredServices">{{service.name}}</option>
         </select>
 
       </div>
@@ -148,7 +148,7 @@
         [ngClass]="{invalid: form.get('amount')?.touched && form.get('amount')!.invalid}"
       >
         <label for="amount" class="form-label">К-сть:</label>
-        <input class="form-input" id="amount" type="number" formControlName="amount">
+        <input class="form-input" id="amount" type="number" formControlName="amount" min="1">
 
       </div>
     </div>
@@ -174,5 +174,5 @@
 <ng-template #loader>
   <p class="text-center">Завантаження...</p>
 </ng-template>
-<router-outlet></router-outlet>
+
 

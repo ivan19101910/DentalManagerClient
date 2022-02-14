@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {
-  AppointmentServiceCreate,
-  CreateAppointment,
+  AppointmentFull,
+  AppointmentServiceCreate, AppointmentServiceEdit,
+  CreateAppointment, EditAppointment,
   Patient,
   Service,
   ServiceType, ShortAppointment,
@@ -30,14 +31,14 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
   workers?: ShowWorker[]
   workerAcc?: WorkerFull
   services?: Service[]
+  filteredServices?: Service[]
   serviceTypes?: ServiceType[]
   patients?: Patient[]
-  workerEdit?: ShowWorker
-
+  appointment?: AppointmentFull
   workerId?: number
   patientId?: number
 
-  appointmentServices: AppointmentServiceCreate[] = []
+  appointmentServices: AppointmentServiceEdit[] = []
 
   tSub?: Subscription
   pSub?: Subscription
@@ -55,6 +56,9 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
     private router: Router,
     private http: HttpClient
   ) {
+
+
+
     this.form = new FormGroup({
 
       appointmentDate: new FormControl(null, Validators.required),
@@ -70,30 +74,30 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy(): void {
-    this.tSub?.unsubscribe()
-    this.sSub?.unsubscribe()
-    this.pSub?.unsubscribe()
-  }
+
 
   ngOnInit(): void {
     this.route.params.pipe(
       switchMap((params: Params) => {
         return this.appointmentService.getById(params['id'])
       })
-    ).subscribe((appointment: ShortAppointment) => {
+    ).subscribe((appointment: AppointmentFull) => {
       this.appointment = appointment
+      //console.log(appointment)
+      this.workerId = appointment.workerId
+      this.patientId = appointment.patientId
+      this.appointmentServices = appointment.appointmentServices
       this.form = new FormGroup({
-        appointmentDate: new FormControl(null, Validators.required),
-        appointmentTime: new FormControl(null, Validators.required),
-        appointmentEndTime: new FormControl(null),
-        notes: new FormControl(null),
-        totalSum: new FormControl(null),
+        appointmentDate: new FormControl(new Date(appointment.appointmentDate).toISOString().substr(0, 10), Validators.required),
+        appointmentTime: new FormControl(appointment.appointmentTime, Validators.required),
+        appointmentEndTime: new FormControl(appointment.realEndTime),
+        notes: new FormControl(appointment.notes),
+        totalSum: new FormControl(appointment.totalSum),
         worker: new FormControl(null, Validators.required),
         patient: new FormControl(null, Validators.required),
         serviceType: new FormControl(null),
         service: new FormControl(null),
-        amount: new FormControl(null)
+        amount: new FormControl(1,null)
       })
 
       // this.form = new FormGroup({
@@ -121,28 +125,65 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
     this.workerService.getById(+localStorage.getItem("id")!)
       .subscribe(worker =>{
         this.workerAcc = worker;
-        console.log(this.workerAcc);
+        //console.log(this.workerAcc);
       })
 
   }
+
+  ngOnDestroy(): void {
+    this.tSub?.unsubscribe()
+    this.sSub?.unsubscribe()
+    this.pSub?.unsubscribe()
+  }
+
   addAppointmentService(){
     let serviceId = this.services!
       .find(val => val.name == this.form.value.service)!.id
     let price = this.services!
       .find(val => val.name == this.form.value.service)!.price
-    let appointmentService: AppointmentServiceCreate =
-      {
-        serviceName: this.form.value.service,
-        servicePrice: price,
-        serviceId: serviceId,
-        amount: this.form.value.amount
-      };
-    this.appointmentServices?.push(appointmentService)
+
+    let existingAppointmentService = this.appointmentServices.filter(x => x.serviceName == this.form.value.service)[0]
+
+    if (existingAppointmentService) {
+      existingAppointmentService.amount += this.form.value.amount
+    } else {
+      let appointmentService: AppointmentServiceEdit =
+        {
+          id: 0,
+          serviceName: this.form.value.service,
+          servicePrice: price,
+          serviceId: serviceId,
+          appointmentId: this.appointment!.id,
+          amount: this.form.value.amount
+        };
+      this.appointmentServices?.push(appointmentService)
+    }
+
+    // let appointmentService: AppointmentServiceEdit =
+    //   {
+    //     id: 0,
+    //     appointmentId: this.appointment!.id,
+    //     serviceName: this.form.value.service,
+    //     servicePrice: price,
+    //     serviceId: serviceId,
+    //     amount: this.form.value.amount
+    //   };
+    // this.appointmentServices?.push(appointmentService)
 
   }
+  removeAppointmentService(appointmentService: AppointmentServiceEdit):  void{
+    const index = this.appointmentServices.indexOf(appointmentService)
+    this.appointmentServices.splice(index, 1)
+  }
+
+  filterServices(){
+    this.filteredServices = this.services?.filter(val => val.serviceTypeName == this.form.value.serviceType)
+  }
+
   submit() {
 
-    const appointment: CreateAppointment ={
+    const appointment: EditAppointment ={
+      id: this.appointment!.id,
       appointmentDate: this.form.value.appointmentDate,
       notes: this.form.value.notes,
       appointmentTime: this.form.value.appointmentTime,
@@ -153,7 +194,8 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
       totalSum: this.form.value.totalSum,
       appointmentServices: this.appointmentServices
     }
-    this.appointmentService.create(appointment).subscribe(() => {
+    console.log(appointment)
+    this.appointmentService.update(appointment).subscribe(() => {
       this.form.reset()
       this.router.navigate(['/appointments'])
       this.submitted = false
