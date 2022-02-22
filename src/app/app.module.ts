@@ -28,6 +28,30 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { ShowAppointmentsComponent } from './appointments/show-appointments/show-appointments.component';
 import { CreateAppointmentComponent } from './appointments/create-appointment/create-appointment.component';
 import { EditAppointmentComponent } from './appointments/edit-appointment/edit-appointment.component';
+import { AppointmentPaymentsComponent } from './appointment-payments/appointment-payments.component';
+import { CreateAppointmentPaymentComponent } from './appointment-payments/create-appointment-payment/create-appointment-payment.component';
+import { EditAppointmentPaymentComponent } from './appointment-payments/edit-appointment-payment/edit-appointment-payment.component';
+import { ShowAppointmentPaymentsComponent } from './appointment-payments/show-appointment-payments/show-appointment-payments.component';
+import { AppointmentStatusesComponent } from './appointment-statuses/appointment-statuses.component';
+import { CreateAppointmentStatusComponent } from './appointment-statuses/create-appointment-status/create-appointment-status.component';
+import { EditAppointmentStatusComponent } from './appointment-statuses/edit-appointment-status/edit-appointment-status.component';
+import { ShowAppointmentStatusesComponent } from './appointment-statuses/show-appointment-statuses/show-appointment-statuses.component';
+import { CitiesComponent } from './cities/cities.component';
+import { CreateCityComponent } from './cities/create-city/create-city.component';
+import { EditCityComponent } from './cities/edit-city/edit-city.component';
+import { ShowCitiesComponent } from './cities/show-cities/show-cities.component';
+import { PositionsComponent } from './positions/positions.component';
+import { CreatePositionComponent } from './positions/create-position/create-position.component';
+import { EditPositionComponent } from './positions/edit-position/edit-position.component';
+import { ShowPositionsComponent } from './positions/show-positions/show-positions.component';
+import { OfficesComponent } from './offices/offices.component';
+import { CreateOfficeComponent } from './offices/create-office/create-office.component';
+import { EditOfficeComponent } from './offices/edit-office/edit-office.component';
+import { ShowOfficesComponent } from './offices/show-offices/show-offices.component';
+import { SalaryPaymentsComponent } from './salary-payments/salary-payments.component';
+import { EditSalaryPaymentComponent } from './salary-payments/edit-salary-payment/edit-salary-payment.component';
+import { ShowSalaryPaymentsComponent } from './salary-payments/show-salary-payments/show-salary-payments.component';
+import {CreateSalaryPaymentComponent} from "./salary-payments/create-salary-payment/create-salary-payment.component";
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -57,7 +81,31 @@ const INTERCEPTOR_PROVIDER: Provider = {
     AppointmentsComponent,
     ShowAppointmentsComponent,
     CreateAppointmentComponent,
-    EditAppointmentComponent
+    EditAppointmentComponent,
+    AppointmentPaymentsComponent,
+    CreateAppointmentPaymentComponent,
+    EditAppointmentPaymentComponent,
+    ShowAppointmentPaymentsComponent,
+    AppointmentStatusesComponent,
+    CreateAppointmentStatusComponent,
+    EditAppointmentStatusComponent,
+    ShowAppointmentStatusesComponent,
+    CitiesComponent,
+    CreateCityComponent,
+    EditCityComponent,
+    ShowCitiesComponent,
+    PositionsComponent,
+    CreatePositionComponent,
+    EditPositionComponent,
+    ShowPositionsComponent,
+    OfficesComponent,
+    CreateOfficeComponent,
+    EditOfficeComponent,
+    ShowOfficesComponent,
+    SalaryPaymentsComponent,
+    CreateSalaryPaymentComponent,
+    EditSalaryPaymentComponent,
+    ShowSalaryPaymentsComponent
   ],
     imports: [
         BrowserModule,

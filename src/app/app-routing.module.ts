@@ -19,6 +19,42 @@ import {AppointmentsComponent} from "./appointments/appointments.component";
 import {ShowAppointmentsComponent} from "./appointments/show-appointments/show-appointments.component";
 import {CreateAppointmentComponent} from "./appointments/create-appointment/create-appointment.component";
 import {EditAppointmentComponent} from "./appointments/edit-appointment/edit-appointment.component";
+import {AppointmentPaymentsComponent} from "./appointment-payments/appointment-payments.component";
+import {
+  ShowAppointmentPaymentsComponent
+} from "./appointment-payments/show-appointment-payments/show-appointment-payments.component";
+import {
+  CreateAppointmentPaymentComponent
+} from "./appointment-payments/create-appointment-payment/create-appointment-payment.component";
+import {
+  EditAppointmentPaymentComponent
+} from "./appointment-payments/edit-appointment-payment/edit-appointment-payment.component";
+import {AppointmentStatusesComponent} from "./appointment-statuses/appointment-statuses.component";
+import {
+  ShowAppointmentStatusesComponent
+} from "./appointment-statuses/show-appointment-statuses/show-appointment-statuses.component";
+import {
+  CreateAppointmentStatusComponent
+} from "./appointment-statuses/create-appointment-status/create-appointment-status.component";
+import {
+  EditAppointmentStatusComponent
+} from "./appointment-statuses/edit-appointment-status/edit-appointment-status.component";
+import {CitiesComponent} from "./cities/cities.component";
+import {ShowCitiesComponent} from "./cities/show-cities/show-cities.component";
+import {CreateCityComponent} from "./cities/create-city/create-city.component";
+import {EditCityComponent} from "./cities/edit-city/edit-city.component";
+import {PositionsComponent} from "./positions/positions.component";
+import {ShowPositionsComponent} from "./positions/show-positions/show-positions.component";
+import {CreatePositionComponent} from "./positions/create-position/create-position.component";
+import {EditPositionComponent} from "./positions/edit-position/edit-position.component";
+import {OfficesComponent} from "./offices/offices.component";
+import {ShowOfficesComponent} from "./offices/show-offices/show-offices.component";
+import {CreateOfficeComponent} from "./offices/create-office/create-office.component";
+import {EditOfficeComponent} from "./offices/edit-office/edit-office.component";
+import {SalaryPaymentsComponent} from "./salary-payments/salary-payments.component";
+import {ShowSalaryPaymentsComponent} from "./salary-payments/show-salary-payments/show-salary-payments.component";
+import {CreateSalaryPaymentComponent} from "./salary-payments/create-salary-payment/create-salary-payment.component";
+import {EditSalaryPaymentComponent} from "./salary-payments/edit-salary-payment/edit-salary-payment.component";
 
 const routes: Routes = [
   {
@@ -57,6 +93,54 @@ const routes: Routes = [
       {path: 'create', component: CreateAppointmentComponent, canActivate:[AuthGuard]},
       {path: 'getAll', component: ShowAppointmentsComponent, canActivate:[AuthGuard]},
       {path: 'edit/:id', component: EditAppointmentComponent, canActivate:[AuthGuard]}
+    ]
+  },
+  {
+    path: "appointmentPayments", component: AppointmentPaymentsComponent, canActivate:[AuthGuard], children: [
+      {path: '', component: ShowAppointmentPaymentsComponent, canActivate:[AuthGuard]},
+      {path: 'create', component: CreateAppointmentPaymentComponent, canActivate:[AuthGuard]},
+      {path: 'getAll', component: ShowAppointmentPaymentsComponent, canActivate:[AuthGuard]},
+      {path: 'edit/:id', component: EditAppointmentPaymentComponent, canActivate:[AuthGuard]}
+    ]
+  },
+  {
+    path: "appointmentStatuses", component: AppointmentStatusesComponent, canActivate:[AuthGuard], children: [
+      {path: '', component: ShowAppointmentStatusesComponent, canActivate:[AuthGuard]},
+      {path: 'create', component: CreateAppointmentStatusComponent, canActivate:[AuthGuard]},
+      {path: 'getAll', component: ShowAppointmentStatusesComponent, canActivate:[AuthGuard]},
+      {path: 'edit/:id', component: EditAppointmentStatusComponent, canActivate:[AuthGuard]}
+    ]
+  },
+  {
+    path: "cities", component: CitiesComponent, canActivate:[AuthGuard], children: [
+      {path: '', component: ShowCitiesComponent, canActivate:[AuthGuard]},
+      {path: 'create', component: CreateCityComponent, canActivate:[AuthGuard]},
+      {path: 'getAll', component: ShowCitiesComponent, canActivate:[AuthGuard]},
+      {path: 'edit/:id', component: EditCityComponent, canActivate:[AuthGuard]}
+    ]
+  },
+  {
+    path: "positions", component: PositionsComponent, canActivate:[AuthGuard], children: [
+      {path: '', component: ShowPositionsComponent, canActivate:[AuthGuard]},
+      {path: 'create', component: CreatePositionComponent, canActivate:[AuthGuard]},
+      {path: 'getAll', component: ShowPositionsComponent, canActivate:[AuthGuard]},
+      {path: 'edit/:id', component: EditPositionComponent, canActivate:[AuthGuard]}
+    ]
+  },
+  {
+    path: "offices", component: OfficesComponent, canActivate:[AuthGuard], children: [
+      {path: '', component: ShowOfficesComponent, canActivate:[AuthGuard]},
+      {path: 'create', component: CreateOfficeComponent, canActivate:[AuthGuard]},
+      {path: 'getAll', component: ShowOfficesComponent, canActivate:[AuthGuard]},
+      {path: 'edit/:id', component: EditOfficeComponent, canActivate:[AuthGuard]}
+    ]
+  },
+  {
+    path: "salaryPayments", component: SalaryPaymentsComponent, canActivate:[AuthGuard], children: [
+      {path: '', component: ShowSalaryPaymentsComponent, canActivate:[AuthGuard]},
+      {path: 'create', component: CreateSalaryPaymentComponent, canActivate:[AuthGuard]},
+      {path: 'getAll', component: ShowSalaryPaymentsComponent, canActivate:[AuthGuard]},
+      {path: 'edit/:id', component: EditSalaryPaymentComponent, canActivate:[AuthGuard]}
     ]
   }
 

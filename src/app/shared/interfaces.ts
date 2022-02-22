@@ -75,7 +75,13 @@ export interface EditWorker{
 export interface ShowOffice{
   id: number
   address: string
+  cityId: number
   cityName: string
+}
+export interface CreateOffice{
+  id: number
+  address: string
+  cityId: number
 }
 export interface Position{
   id: number
@@ -144,4 +150,42 @@ export interface AppointmentFull{
   statusId: number
   totalSum: number
   appointmentServices: AppointmentServiceEdit[]
+}
+export interface AppointmentPayment{
+  id: number
+  transactionNumber: number
+  appointmentId: number
+  total: number
+}
+export interface AppointmentStatus{
+  id: number
+  name: string
+}
+export interface City{
+  id: number
+  name: string
+}
+export interface Position{
+  id: number
+  positionName: string
+  appointmentPercentage: number
+  baseRate: number
+}
+export interface SalaryPayment{
+  id: number
+  monthNumber: number
+  year: number
+  transactionNumber: number
+  amount: number
+  workerId: number
+}
+export interface ShowSalaryPayment{
+  id: number
+  monthNumber: number
+  year: number
+  transactionNumber: number
+  amount: number
+  workerId: number
+  workerName: string
+  workerSurname: string
 }

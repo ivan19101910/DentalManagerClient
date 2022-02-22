@@ -1,0 +1,47 @@
+<div class="positions-wrapper">
+  <div *ngIf="payments; else loader" class="positions-all">
+    <table class="positions-table">
+      <thead>
+      <tr>
+        <th class="position-el-header">Номер транзакції</th>
+        <th class="position-el-header">Робітник</th>
+        <th class="position-el-header">Місяць</th>
+        <th class="position-el-header">Рік</th>
+        <th class="position-el-header">Розмір виплати</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let payment of payments | paginate: { itemsPerPage: 10, currentPage: page}">
+        <td class="position-el">{{payment.transactionNumber}}</td>
+        <td class="position-el">{{payment.workerName}}{{payment.workerSurname}}</td>
+        <td class="position-el">{{payment.monthNumber}}</td>
+        <td class="position-el">{{payment.year}}</td>
+        <td class="position-el">{{payment.amount}}</td>
+        <td class="action-section">
+          <svg class="edit-icon" [routerLink]="['/salaryPayments', 'edit', payment.id]" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 19h1.414l9.314-9.314-1.414-1.414L5 17.586V19zm16 2H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L9.243 19H21v2zM15.728 6.858l1.414 1.414 1.414-1.414-1.414-1.414-1.414 1.414z" fill="rgba(53,48,47,1)"/></svg>
+          <svg class="delete-icon" (click)="remove(payment.id)" viewBox="0 0 24 24" width="32" height="32" ><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-4.586 6l1.768 1.768-1.414 1.414L12 15.414l-1.768 1.768-1.414-1.414L10.586 14l-1.768-1.768 1.414-1.414L12 12.586l1.768-1.768 1.414 1.414L13.414 14zM9 4v2h6V4H9z" fill="rgba(53,48,47,1)"/></svg>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="bottom-section">
+    <button class="create-button" [routerLink]="['/salaryPayments', 'create']">
+      Створити виплату</button>
+    <pagination-controls class="pagination-controls" previousLabel=""
+                         nextLabel=""
+                         (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>
+
+
+<ng-template #loader>
+  <p class="text-center">Завантаження...</p>
+</ng-template>
+
+
+
+
+

@@ -1,16 +1,16 @@
 
-.patient-table{
+.payment-table{
   color: #35302F;
   width: 100%;
 }
 
-.patient-all{
+.payment-all{
   display: flex;
   justify-content: center;
 
   align-items: stretch;//
   flex-direction: column;//this 2 prop for stretching table, remove if unnecessary
-  //margin: 30px 30px 0 30px;
+  margin: 30px 30px 0 30px;
 }
 .action-section{
   display:flex;
@@ -21,13 +21,13 @@
   flex-shrink: 0;
   flex-basis: auto;
 }
-.patient-el{
+.payment-el{
   flex: 1 1 auto;
   font-size: 18px;
   height:40px;
   flex-basis: 100%;
 }
-.patient-el-header{
+.payment-el-header{
   font-size: 18px;
   height:40px;
 }
@@ -74,30 +74,15 @@ td{
   display: flex;
   margin: 30px 30px 0 0;
 }
-
 .show-wrapper{
   display: flex;
   flex-direction: column;
-  //min-height: 100%;
+  min-height: 100%;
   width: 100%;
   min-width: 100%;
   height: 100%;
 
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 100%;
-  //position: relative;
-  //left: 0px;
-  //
-  //width: 100%;
-  //height: 100%;
-  //
-  //margin: 0px;
-  //padding: 0px;
-
-
   //flex-grow: 1;
-  //flex: 1;
   //flex-shrink: 1;
   //flex-basis: 100%;
 }

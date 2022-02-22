@@ -1,16 +1,19 @@
-<div class="header">
-  <div class="container">
+<header class="header">
+  <div class="header-body">
     <div class="name">DentalManager</div>
-      <div class="list">
-        <div class="el" [routerLink]="['/services']">Послуги</div>
-        <div class="el" [routerLink]="['/patients']">Пацієнти</div>
-        <div class="el" [routerLink]="['/appointments']">Прийоми</div>
-        <div class="el" [routerLink]="['/workers']">Працівники</div>
-        <div class="el">
-          <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3zm-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228z"></path></svg>
-        </div>
+    <div class="header-burger">
+      <svg viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(255,255,255,1)"/></svg>
+<!--      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(255,255,255,1)"/></svg>-->
+    </div>
+    <ul class="list">
+      <li class="el" [routerLink]="['/services']">Послуги</li>
+      <li class="el" [routerLink]="['/patients']">Пацієнти</li>
+      <li class="el" [routerLink]="['/appointments']">Прийоми</li>
+      <li class="el" [routerLink]="['/workers']">Працівники</li>
+      <div class="el">
+        <svg width="72" height="72" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3zm-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228z"></path></svg>
       </div>
+    </ul>
   </div>
-
-</div>
+</header>
 <!--<button (click)="auth.logout()">BATON</button>-->
