@@ -50,6 +50,8 @@ export interface WorkerFull{
   positionName: string
   officeCity: string
   officeAddress: string
+  //workerSchedules: WorkerSchedule[]
+  workerSchedules: FullWorkerSchedule[]
 }
 export interface CreateWorker{
   firstName: string
@@ -60,6 +62,7 @@ export interface CreateWorker{
   address: string
   positionId: number
   officeId: number
+  workerSchedules: CreateWorkerSchedule[]
 }
 export interface EditWorker{
   id: number
@@ -71,6 +74,7 @@ export interface EditWorker{
   address: string
   positionId: number
   officeId: number
+  workerSchedules: CreateWorkerSchedule[]
 }
 export interface ShowOffice{
   id: number
@@ -188,4 +192,46 @@ export interface ShowSalaryPayment{
   workerId: number
   workerName: string
   workerSurname: string
+}
+export interface ShowSchedule{
+  id: number
+  dayId: number
+  day: string
+  timeSegmentId: number
+  timeStart: Time
+  timeEnd: Time
+}
+export interface CreateSchedule{
+  id: number
+  dayId: number
+  timeSegmentId: number
+}
+export interface Day{
+  id: number
+  name: string
+}
+export interface TimeSegment{
+  id: number
+  timeStart: Time
+  timeEnd: Time
+}
+export interface WorkerSchedule{
+  id: number
+  workerId: number
+  scheduleId: number
+  worker: ShowWorker | undefined
+  schedule: ShowSchedule
+}
+export interface CreateWorkerSchedule{
+  id: number
+  workerId: number
+  scheduleId: number
+}
+export interface FullWorkerSchedule{
+  id: number
+  workerId: number
+  scheduleId: number
+  day: string
+  timeStart: Time
+  timeEnd: Time
 }

@@ -110,11 +110,14 @@
 
       </div>
       <div class="bottom-section">
-        <div class="create-button" (click)="addAppointmentService()">
-          Додати послугу</div>
-        <pagination-controls class="pagination-controls" previousLabel=""
-                             nextLabel=""
-                             (pageChange)="page = $event"></pagination-controls>
+        <div class="form-horizontal-group">
+          <div class="create-button" (click)="addAppointmentService()">
+            Додати послугу</div>
+          <pagination-controls class="pagination-controls" previousLabel=""
+                               nextLabel=""
+                               (pageChange)="page = $event"></pagination-controls>
+        </div>
+
       </div>
     </div>
 

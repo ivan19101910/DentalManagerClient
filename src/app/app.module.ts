@@ -52,6 +52,16 @@ import { SalaryPaymentsComponent } from './salary-payments/salary-payments.compo
 import { EditSalaryPaymentComponent } from './salary-payments/edit-salary-payment/edit-salary-payment.component';
 import { ShowSalaryPaymentsComponent } from './salary-payments/show-salary-payments/show-salary-payments.component';
 import {CreateSalaryPaymentComponent} from "./salary-payments/create-salary-payment/create-salary-payment.component";
+import { SchedulesComponent } from './schedules/schedules.component';
+import { CreateScheduleComponent } from './schedules/create-schedule/create-schedule.component';
+import { EditScheduleComponent } from './schedules/edit-schedule/edit-schedule.component';
+import { ShowSchedulesComponent } from './schedules/show-schedules/show-schedules.component';
+import { DayComponent } from './day/day.component';
+import { TimeSegmentComponent } from './time-segment/time-segment.component';
+import { WorkerSchedulesComponent } from './worker-schedules/worker-schedules.component';
+import { CreateWorkerScheduleComponent } from './worker-schedules/create-worker-schedule/create-worker-schedule.component';
+import { EditWorkerScheduleComponent } from './worker-schedules/edit-worker-schedule/edit-worker-schedule.component';
+import { ShowWorkerSchedulesComponent } from './worker-schedules/show-worker-schedules/show-worker-schedules.component';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -105,7 +115,17 @@ const INTERCEPTOR_PROVIDER: Provider = {
     SalaryPaymentsComponent,
     CreateSalaryPaymentComponent,
     EditSalaryPaymentComponent,
-    ShowSalaryPaymentsComponent
+    ShowSalaryPaymentsComponent,
+    SchedulesComponent,
+    CreateScheduleComponent,
+    EditScheduleComponent,
+    ShowSchedulesComponent,
+    DayComponent,
+    TimeSegmentComponent,
+    WorkerSchedulesComponent,
+    CreateWorkerScheduleComponent,
+    EditWorkerScheduleComponent,
+    ShowWorkerSchedulesComponent
   ],
     imports: [
         BrowserModule,

@@ -55,6 +55,16 @@ import {SalaryPaymentsComponent} from "./salary-payments/salary-payments.compone
 import {ShowSalaryPaymentsComponent} from "./salary-payments/show-salary-payments/show-salary-payments.component";
 import {CreateSalaryPaymentComponent} from "./salary-payments/create-salary-payment/create-salary-payment.component";
 import {EditSalaryPaymentComponent} from "./salary-payments/edit-salary-payment/edit-salary-payment.component";
+import {SchedulesComponent} from "./schedules/schedules.component";
+import {ShowSchedulesComponent} from "./schedules/show-schedules/show-schedules.component";
+import {CreateScheduleComponent} from "./schedules/create-schedule/create-schedule.component";
+import {EditScheduleComponent} from "./schedules/edit-schedule/edit-schedule.component";
+import {WorkerSchedulesComponent} from "./worker-schedules/worker-schedules.component";
+import {ShowWorkerSchedulesComponent} from "./worker-schedules/show-worker-schedules/show-worker-schedules.component";
+import {
+  CreateWorkerScheduleComponent
+} from "./worker-schedules/create-worker-schedule/create-worker-schedule.component";
+import {EditWorkerScheduleComponent} from "./worker-schedules/edit-worker-schedule/edit-worker-schedule.component";
 
 const routes: Routes = [
   {
@@ -141,6 +151,22 @@ const routes: Routes = [
       {path: 'create', component: CreateSalaryPaymentComponent, canActivate:[AuthGuard]},
       {path: 'getAll', component: ShowSalaryPaymentsComponent, canActivate:[AuthGuard]},
       {path: 'edit/:id', component: EditSalaryPaymentComponent, canActivate:[AuthGuard]}
+    ]
+  },
+  {
+    path: "schedules", component: SchedulesComponent, canActivate:[AuthGuard], children: [
+      {path: '', component: ShowSchedulesComponent, canActivate:[AuthGuard]},
+      {path: 'create', component: CreateScheduleComponent, canActivate:[AuthGuard]},
+      {path: 'getAll', component: ShowSchedulesComponent, canActivate:[AuthGuard]},
+      {path: 'edit/:id', component: EditScheduleComponent, canActivate:[AuthGuard]}
+    ]
+  },
+  {
+    path: "workerSchedules", component: WorkerSchedulesComponent, canActivate:[AuthGuard], children: [
+      {path: '', component: ShowWorkerSchedulesComponent, canActivate:[AuthGuard]},
+      {path: 'create', component: CreateWorkerScheduleComponent, canActivate:[AuthGuard]},
+      {path: 'getAll', component: ShowWorkerSchedulesComponent, canActivate:[AuthGuard]},
+      {path: 'edit/:id', component: EditWorkerScheduleComponent, canActivate:[AuthGuard]}
     ]
   }
 

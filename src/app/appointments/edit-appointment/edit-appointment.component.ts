@@ -2,11 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {
   AppointmentFull,
-  AppointmentServiceCreate, AppointmentServiceEdit,
-  CreateAppointment, EditAppointment,
+  AppointmentServiceEdit,
+  EditAppointment,
   Patient,
   Service,
-  ServiceType, ShortAppointment,
+  ServiceType,
   ShowWorker,
   WorkerFull
 } from "../../shared/interfaces";
@@ -83,7 +83,6 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
       })
     ).subscribe((appointment: AppointmentFull) => {
       this.appointment = appointment
-      //console.log(appointment)
       this.workerId = appointment.workerId
       this.patientId = appointment.patientId
       this.appointmentServices = appointment.appointmentServices
@@ -100,13 +99,6 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
         amount: new FormControl(1,null)
       })
 
-      // this.form = new FormGroup({
-      //   name: new FormControl(patient.firstName, Validators.required),
-      //   lastName: new FormControl(patient.lastName, Validators.required),
-      //   address: new FormControl(patient.address, Validators.required),
-      //   date: new FormControl(new Date(patient.dateOfBirth).toISOString().substr(0, 10), Validators.required),
-      //   phoneNumber: new FormControl(patient.phoneNumber, Validators.required),
-      // })
     })
 
 
@@ -125,7 +117,6 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
     this.workerService.getById(+localStorage.getItem("id")!)
       .subscribe(worker =>{
         this.workerAcc = worker;
-        //console.log(this.workerAcc);
       })
 
   }
@@ -134,6 +125,7 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
     this.tSub?.unsubscribe()
     this.sSub?.unsubscribe()
     this.pSub?.unsubscribe()
+    this.stSub?.unsubscribe()
   }
 
   addAppointmentService(){
@@ -159,17 +151,6 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
       this.appointmentServices?.push(appointmentService)
     }
 
-    // let appointmentService: AppointmentServiceEdit =
-    //   {
-    //     id: 0,
-    //     appointmentId: this.appointment!.id,
-    //     serviceName: this.form.value.service,
-    //     servicePrice: price,
-    //     serviceId: serviceId,
-    //     amount: this.form.value.amount
-    //   };
-    // this.appointmentServices?.push(appointmentService)
-
   }
   removeAppointmentService(appointmentService: AppointmentServiceEdit):  void{
     const index = this.appointmentServices.indexOf(appointmentService)
@@ -194,7 +175,7 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
       totalSum: this.form.value.totalSum,
       appointmentServices: this.appointmentServices
     }
-    console.log(appointment)
+
     this.appointmentService.update(appointment).subscribe(() => {
       this.form.reset()
       this.router.navigate(['/appointments'])
