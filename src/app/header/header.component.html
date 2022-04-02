@@ -1,19 +1,85 @@
-<header class="header">
-  <div class="header-body">
-    <div class="name">DentalManager</div>
-    <div class="header-burger">
-      <svg viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(255,255,255,1)"/></svg>
-<!--      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(255,255,255,1)"/></svg>-->
-    </div>
-    <ul class="list">
-      <li class="el" [routerLink]="['/services']">Послуги</li>
-      <li class="el" [routerLink]="['/patients']">Пацієнти</li>
-      <li class="el" [routerLink]="['/appointments']">Прийоми</li>
-      <li class="el" [routerLink]="['/workers']">Працівники</li>
-      <div class="el">
-        <svg width="72" height="72" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3zm-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228z"></path></svg>
-      </div>
-    </ul>
-  </div>
-</header>
+<!--<header class="header">-->
+<!--  <div class="header-body">-->
+<!--    <div class="name">DentalManager</div>-->
+<!--&lt;!&ndash;    <div class="header-burger">&ndash;&gt;-->
+<!--&lt;!&ndash;      <svg viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(255,255,255,1)"/></svg>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(255,255,255,1)"/></svg>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--    <ul class="list">-->
+<!--&lt;!&ndash;      <li class="el" [routerLink]="['/services']">Послуги</li>&ndash;&gt;-->
+<!--      <li><a href="" class="submenu-link">О нас</a>-->
+<!--        <ul class="submenu">-->
+<!--          <li><a href="">Производство</a></li>-->
+<!--          <li><a href="">Магазин</a></li>-->
+<!--          <li><a href="">Сервис</a></li>-->
+<!--        </ul>-->
+<!--      </li>-->
+<!--      <li class="el" [routerLink]="['/patients']">Пацієнти</li>-->
+<!--      <li class="el" [routerLink]="['/appointments']">Прийоми</li>-->
+<!--      <li class="el" [routerLink]="['/workers']">Працівники</li>-->
+<!--      <div class="el">-->
+<!--        <svg width="72" height="72" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3zm-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228z"></path></svg>-->
+<!--      </div>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</header>-->
+
 <!--<button (click)="auth.logout()">BATON</button>-->
+
+<!--<ul class="topmenu">-->
+<!--  <li><a href="">Home</a></li>-->
+<!--  <li><a href="">Shop</a></li>-->
+<!--  <li><a href="">Blog</a>-->
+<!--    <ul class="submenu">-->
+<!--      <li><a href="">Category</a></li>-->
+<!--      <li><a href="">Author</a></li>-->
+<!--      <li><a href="">Archive</a></li>-->
+<!--      <li><a href="">Tags</a></li>-->
+<!--    </ul>-->
+<!--  </li>-->
+<!--  <li><a href="">Portfolio</a>-->
+<!--    <ul class="submenu">-->
+<!--      <li><a href="">Category</a></li>-->
+<!--      <li><a href="">Author</a></li>-->
+<!--      <li><a href="">Archive</a></li>-->
+<!--      <li><a href="">Tags</a></li>-->
+<!--    </ul>-->
+<!--  </li>-->
+<!--  <li><a href="">Contact</a></li>-->
+<!--</ul>-->
+
+
+<!--<header class="header">-->
+<!--  <div class="header-body">-->
+<!--    <div class="name">DentalManager</div>-->
+<header>
+  <ul class="topmenu">
+<!--    <li>DentalManager</li>-->
+    <li><a href="" [routerLink]="['/services']">Послуги</a>
+      <ul class="submenu">
+        <li><a href="" [routerLink]="['/serviceTypes']">Типи послуг</a></li>
+      </ul>
+    </li>
+    <li><a href="" [routerLink]="['/patients']">Пацієнти</a>
+    </li>
+    <li><a href="" [routerLink]="['/appointments']">Прийоми</a>
+      <ul class="submenu">
+        <li><a href="" [routerLink]="['/appointmentStatuses']">Статуси</a></li>
+        <li><a href="" [routerLink]="['/appointmentPayments']">Оплати</a></li>
+      </ul>
+    </li>
+    <li><a href="" [routerLink]="['/workers']">Працівники</a>
+      <ul class="submenu">
+        <li><a href="" [routerLink]="['/salaryPayments']">Зарплати</a></li>
+        <li><a href="" [routerLink]="['/offices']">Офіси</a></li>
+        <li><a href="" [routerLink]="['/cities']">Міста</a></li>
+        <li><a href="" [routerLink]="['/positions']">Посади</a></li>
+        <li><a href="" [routerLink]="['/schedules']">Розклади</a></li>
+<!--        <li><a href="" [routerLink]="['/workerSchedules']">Розклади робітників</a></li>-->
+      </ul>
+    </li>
+  </ul>
+</header>
+
+<!--  </div>-->
+<!--</header>-->

@@ -45,6 +45,94 @@
 .header-burger{
   display: none;
 }
+/////////////////////////////////////
+header{
+  height: 100px;
+}
+
+.topmenu {
+  background: #433633;
+  height: 100px;
+}
+
+.topmenu a {
+  text-decoration: none;
+  display: block;
+  transition: .4s ease-in-out;
+}
+
+.topmenu>li>a {
+  padding: 20px;
+  color: white;
+  //text-transform: uppercase;
+  //font-weight: bold;
+  font-size: 36px;
+  //letter-spacing: 1px;
+  //font-family: 'Exo 2', sans-serif;
+}
+
+.topmenu li a:hover {
+  color: #c0a97a;
+}
+
+.submenu li a {
+  border-bottom: 1px solid #efefef;
+  font-size: 12px;
+  color: #484848;
+  //font-family: 'Kurale', serif;
+}
+
+@media(max-width:599px) {
+  .topmenu>li>a {
+    padding: 15px 20px;
+  }
+  .submenu li a {
+    padding: 10px 20px;
+    margin: 0 20px;
+  }
+}
+
+@media(min-width: 600px) {
+  .topmenu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .topmenu>li {
+    position: relative;
+  }
+
+  .topmenu>li:last-child:after {
+    background: none;
+    box-shadow: none;
+  }
+  .submenu {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 210px;
+    margin-left: -105px;
+    background: #fafafa;
+    border: 1px solid #ededed;
+    z-index: 5;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(.8);
+    transition: .4s ease-in-out;
+  }
+  .topmenu>li:hover .submenu {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+  }
+  .submenu li a {
+    text-align: center;
+    padding: 10px 0;
+    margin: 0 10px;
+  }
+}
+
+
 //767px
 //@media (max-width:1920px){
 //  .header-burger{

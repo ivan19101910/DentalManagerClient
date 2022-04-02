@@ -28,6 +28,18 @@ export class AppointmentService{
     return this.http.get<AppointmentFull>(`${environment.serverUrl}appointment/getById/${id}`)
   }
 
+  getByWorkerId(id: number): Observable<AppointmentFull[]>{
+    return this.http.get<AppointmentFull[]>(`${environment.serverUrl}appointment/getByWorkerId/${id}`)
+  }
+
+  getByPatientId(id: number): Observable<AppointmentFull[]>{
+    return this.http.get<AppointmentFull[]>(`${environment.serverUrl}appointment/getByPatientId/${id}`)
+  }
+
+  // getDetailsById(id: number): Observable<AppointmentDetails>{
+  //   return this.http.get<AppointmentDetails>(`${environment.serverUrl}appointment/getDetailsById/${id}`)
+  // }
+
   update(appointment: EditAppointment): Observable<EditAppointment>{
     return this.http.put<EditAppointment>(`${environment.serverUrl}appointment/update`, appointment)
   }
@@ -36,11 +48,7 @@ export class AppointmentService{
     return this.http.post(`${environment.serverUrl}appointment/create`, appointment)
   }
 
-  createManyAppointmentServices(appointmentServices: AppointmentServiceCreate[]){
-    return this.http.post(`${environment.serverUrl}appointmentService/createMany`, appointmentServices)
-  }
-
-  // getAllTypes(): Observable<any>{
-  //   return this.http.get<ShortAppointment[]>(`${environment.serverUrl}serviceType/getAll`)
+  // createManyAppointmentServices(appointmentServices: AppointmentServiceCreate[]){
+  //   return this.http.post(`${environment.serverUrl}appointmentService/createMany`, appointmentServices)
   // }
 }

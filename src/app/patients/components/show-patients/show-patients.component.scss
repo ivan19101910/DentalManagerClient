@@ -10,7 +10,7 @@
 
   align-items: stretch;//
   flex-direction: column;//this 2 prop for stretching table, remove if unnecessary
-  //margin: 30px 30px 0 30px;
+  margin: 30px 30px 0 30px;
 }
 .action-section{
   display:flex;
@@ -64,6 +64,7 @@ td{
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: auto;
+
 }
 .pagination-controls{
   justify-self: flex-end;

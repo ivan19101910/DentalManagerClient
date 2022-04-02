@@ -65,6 +65,11 @@ import {
   CreateWorkerScheduleComponent
 } from "./worker-schedules/create-worker-schedule/create-worker-schedule.component";
 import {EditWorkerScheduleComponent} from "./worker-schedules/edit-worker-schedule/edit-worker-schedule.component";
+import {
+  ShowDetailsAppointmentComponent
+} from "./appointments/show-details-appointment/show-details-appointment.component";
+import {ShowDetailsWorkerComponent} from "./workers/show-details-worker/show-details-worker.component";
+import {ShowDetailsPatientComponent} from "./patients/components/show-details-patient/show-details-patient.component";
 
 const routes: Routes = [
   {
@@ -78,7 +83,8 @@ const routes: Routes = [
       {path: '', component: ShowWorkerComponent, canActivate:[AuthGuard]},
       {path: 'create', component: CreateWorkerComponent, canActivate:[AuthGuard]},
       {path: 'getAll', component: ShowWorkerComponent, canActivate:[AuthGuard]},
-      {path: 'edit/:id', component: EditWorkerComponent, canActivate:[AuthGuard]}
+      {path: 'edit/:id', component: EditWorkerComponent, canActivate:[AuthGuard]},
+      {path: 'details/:id', component: ShowDetailsWorkerComponent, canActivate:[AuthGuard]}
     ]
   },
   {
@@ -86,7 +92,8 @@ const routes: Routes = [
       {path: '', component: ShowPatientsComponent, canActivate:[AuthGuard]},
       {path: 'create', component: CreatePatientComponent, canActivate:[AuthGuard]},
       {path: 'getAll', component: ShowPatientsComponent, canActivate:[AuthGuard]},
-      {path: 'edit/:id', component: EditPatientComponent, canActivate:[AuthGuard]}
+      {path: 'edit/:id', component: EditPatientComponent, canActivate:[AuthGuard]},
+      {path: 'details/:id', component: ShowDetailsPatientComponent, canActivate:[AuthGuard]}
     ]
   },
   {
@@ -102,7 +109,8 @@ const routes: Routes = [
       {path: '', component: ShowAppointmentsComponent, canActivate:[AuthGuard]},
       {path: 'create', component: CreateAppointmentComponent, canActivate:[AuthGuard]},
       {path: 'getAll', component: ShowAppointmentsComponent, canActivate:[AuthGuard]},
-      {path: 'edit/:id', component: EditAppointmentComponent, canActivate:[AuthGuard]}
+      {path: 'edit/:id', component: EditAppointmentComponent, canActivate:[AuthGuard]},
+      {path: 'details/:id', component: ShowDetailsAppointmentComponent, canActivate:[AuthGuard]}
     ]
   },
   {
@@ -160,15 +168,15 @@ const routes: Routes = [
       {path: 'getAll', component: ShowSchedulesComponent, canActivate:[AuthGuard]},
       {path: 'edit/:id', component: EditScheduleComponent, canActivate:[AuthGuard]}
     ]
-  },
-  {
-    path: "workerSchedules", component: WorkerSchedulesComponent, canActivate:[AuthGuard], children: [
-      {path: '', component: ShowWorkerSchedulesComponent, canActivate:[AuthGuard]},
-      {path: 'create', component: CreateWorkerScheduleComponent, canActivate:[AuthGuard]},
-      {path: 'getAll', component: ShowWorkerSchedulesComponent, canActivate:[AuthGuard]},
-      {path: 'edit/:id', component: EditWorkerScheduleComponent, canActivate:[AuthGuard]}
-    ]
   }
+  // {
+  //   path: "workerSchedules", component: WorkerSchedulesComponent, canActivate:[AuthGuard], children: [
+  //     {path: '', component: ShowWorkerSchedulesComponent, canActivate:[AuthGuard]},
+  //     {path: 'create', component: CreateWorkerScheduleComponent, canActivate:[AuthGuard]},
+  //     {path: 'getAll', component: ShowWorkerSchedulesComponent, canActivate:[AuthGuard]},
+  //     {path: 'edit/:id', component: EditWorkerScheduleComponent, canActivate:[AuthGuard]}
+  //   ]
+  // }
 
 
 ];

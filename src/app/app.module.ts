@@ -62,6 +62,12 @@ import { WorkerSchedulesComponent } from './worker-schedules/worker-schedules.co
 import { CreateWorkerScheduleComponent } from './worker-schedules/create-worker-schedule/create-worker-schedule.component';
 import { EditWorkerScheduleComponent } from './worker-schedules/edit-worker-schedule/edit-worker-schedule.component';
 import { ShowWorkerSchedulesComponent } from './worker-schedules/show-worker-schedules/show-worker-schedules.component';
+import { ShowDetailsAppointmentComponent } from './appointments/show-details-appointment/show-details-appointment.component';
+import { ShowDetailsWorkerComponent } from './workers/show-details-worker/show-details-worker.component';
+import { ShowDetailsPatientComponent } from './patients/components/show-details-patient/show-details-patient.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -125,16 +131,22 @@ const INTERCEPTOR_PROVIDER: Provider = {
     WorkerSchedulesComponent,
     CreateWorkerScheduleComponent,
     EditWorkerScheduleComponent,
-    ShowWorkerSchedulesComponent
+    ShowWorkerSchedulesComponent,
+    ShowDetailsAppointmentComponent,
+    ShowDetailsWorkerComponent,
+    ShowDetailsPatientComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        SharedModule,
-        FormsModule,
-        ReactiveFormsModule,
-        NgxPaginationModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxPaginationModule,
+    MatTableModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule
+  ],
   providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent]
 })

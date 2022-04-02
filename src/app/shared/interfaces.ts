@@ -52,6 +52,7 @@ export interface WorkerFull{
   officeAddress: string
   //workerSchedules: WorkerSchedule[]
   workerSchedules: FullWorkerSchedule[]
+  //appointments: AppointmentFull[]
 }
 export interface CreateWorker{
   firstName: string
@@ -144,6 +145,21 @@ export interface AppointmentServiceEdit{
   amount: number
 }
 export interface AppointmentFull{
+  id: number
+  appointmentDate: Date
+  notes: string
+  appointmentTime: Time
+  realEndTime: Time
+  workerId: number
+  patientId: number
+  statusId: number
+  totalSum: number
+  status: AppointmentStatus
+  worker: WorkerFull
+  patient: Patient
+  appointmentServices: AppointmentServiceEdit[]
+}
+export interface AppointmentDetails{
   id: number
   appointmentDate: Date
   notes: string
