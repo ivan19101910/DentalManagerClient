@@ -1,5 +1,14 @@
 <div class="show-wrapper">
   <div *ngIf="workers; else loader" class="services-all">
+    <div class="filter-section">
+      <input class="filter-input" placeholder="Ім'я" type="text" [(ngModel)]="nameSearchField">
+      <input class="filter-input" placeholder="Прізвище" type="text" [(ngModel)]="surnameSearchField">
+      <input class="filter-input" placeholder="Посада" type="text" [(ngModel)]="positionSearchField">
+      <input class="filter-input" placeholder="Місто" type="text" [(ngModel)]="citySearchField">
+      <input class="filter-input" placeholder="Адреса офісу" type="text" [(ngModel)]="officeAddressSearchField">
+      <button class="search-button" (click)="filter()">Знайти</button>
+      <button class="clear-button" (click)="clearFilter()">Очистити</button>
+    </div>
     <table class="service-table">
       <thead>
       <tr>
@@ -12,7 +21,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let worker of workers | paginate: { itemsPerPage: 10, currentPage: page}">
+      <tr *ngFor="let worker of filteredWorkers | paginate: { itemsPerPage: 10, currentPage: page}">
         <td class="service-el">{{worker.firstName}}</td>
         <td class="service-el">{{worker.lastName}}</td>
         <td class="service-el">{{worker.positionName}}</td>
@@ -31,7 +40,7 @@
   </div>
   <div class="bottom-section">
     <button class="create-button" [routerLink]="['/workers', 'create']">
-      Створити робітника</button>
+      Створити працівника</button>
     <pagination-controls class="pagination-controls" previousLabel=""
                          nextLabel=""
                          (pageChange)="page = $event"></pagination-controls>

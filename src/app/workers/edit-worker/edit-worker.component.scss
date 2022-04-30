@@ -12,17 +12,37 @@
   color: #35302F;
 }
 .card{
-  margin-top: 20px;
-  width:40% ;
-  height: 800px;
+  margin-top: 10px;
+  //width:40% ;
+  //height: 800px;
   border: solid 2px #35302F;
   border-radius: 50px;
   align-items: center;
   display: flex;
   flex-direction: column;
   //min-width: 388px;
-  min-width: 540px;
+  //height: 642px;
+  width: 400px;
   background-color: #DECBB7;
+}
+.tab-bar{
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  cursor: pointer;
+}
+.office-tab{
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.schedule-info{
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
 }
 h2{
   color: #35302F;
@@ -47,7 +67,7 @@ h2{
   width: 100%;
   align-content: center;
   display:flex;
-  justify-content: center;
+  justify-content: left;
 }
 
 .form-input{
@@ -60,18 +80,10 @@ h2{
   align-self: center;
   display: block;
   padding-left: 5px;
-  max-width: 150px;
+  width: 300px;
 }
 .form-control{
-  padding-top: 5px;
-  justify-content: flex-start;
-  align-content: flex-start;
-  height: 90px;
-  flex-direction: column;
-  justify-self: center;
-  display: flex;
-  width: 180px;
-  max-height: 68px;
+  width: 300px;
 }
 .form-submit-btn{
   color: #35302F;
@@ -89,16 +101,16 @@ h2{
   justify-content: center;
   justify-self: flex-end;
   align-content: center;
-  height: 64px;
+  height: 44px;
   flex-direction: column;
   display: flex;
-  width: 180px;
+  width: 160px;
+  margin: 0 0 0 0 !important;
 }
-.validation{
-  font-size: 16px;
+.add-section{
+  display: flex;
+  flex-direction: column;
 }
-
-
 /////
 
 .service-table{
@@ -111,7 +123,7 @@ h2{
 
   align-items: stretch;//
   flex-direction: column;//this 2 prop for stretching table, remove if unnecessary
-  margin: 30px 30px 0 30px;
+  margin: 10px 5px 0 5px;
 }
 .action-section{
   //display:flex;
@@ -121,6 +133,11 @@ h2{
   //flex-grow: 1;
   //flex-shrink: 0;
   //flex-basis: auto;
+}
+.main-info{
+  flex-direction: column;
+  align-items: center;
+  //height: 590px !important;
 }
 .service-el{
   flex: 1 1 auto;
@@ -138,7 +155,7 @@ tr{
 td{
   height: 40px;
 }
-.create-button{
+.add-schedule-button{
   background-color: #8F857D;
   border: solid 1px #35302F;
   border-radius: 10px;
@@ -147,12 +164,13 @@ td{
   min-width: 160px;
   font-size: 18px;
   color: #35302F;
-  margin: 30px 0 0 30px;
+  margin: 0 0 20px 0;
   text-align: center;
   text-justify: auto;
   cursor: pointer;
-  justify-self: flex-end;
-  align-self: flex-end;
+  //justify-self: flex-end;
+  align-self: center;
+  //display: flex;
 }
 .bottom-section{
   display: flex;
@@ -167,15 +185,16 @@ td{
 .pagination-controls{
   justify-self: flex-end;
   align-self: flex-end;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 5px;
   width: 100%;
   display: flex;
-  margin: 30px 30px 0 0;
+  margin: 0 0 0 0;
 }
 .show-wrapper{
   display: flex;
   flex-direction: column;
+  width: 100%;
   //min-height: 80%;
 }
 

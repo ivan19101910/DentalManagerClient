@@ -22,6 +22,10 @@ export class WorkerService{
     return this.http.get<WorkerFull>(`${environment.serverUrl}worker/getById/${id}`)
   }
 
+  getSalaryById(id: number, month: number, year: number): Observable<any>{
+    return this.http.get<number>(`${environment.serverUrl}worker/getSalaryById/${id}/${month}/${year}`)
+  }
+
   update(worker: EditWorker): Observable<Worker>{
     return this.http.put<Worker>(`${environment.serverUrl}worker/update`, worker)
   }
@@ -35,4 +39,5 @@ export class WorkerService{
   getAllCities(): Observable<any>{
     return this.http.get<City[]>(`${environment.serverUrl}city/getAll`)
   }
+
 }

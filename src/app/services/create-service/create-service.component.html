@@ -10,54 +10,60 @@
       [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
     >
       <label for="name" class="form-label">Назва:</label>
-      <input class="form-input" id="name" type="text" formControlName="name">
+      <input class="form-input" id="name" type="text" formControlName="name" maxlength="70">
       <div
         *ngIf="form.get('name')?.touched! && form.get('name')?.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('name')?.errors?.['required']">
-          Введіть поле ім'я
-        </small>
+        <div *ngIf="form.get('name')!.errors?.['required']">
+          Введіть поле назва
+        </div>
+        <div *ngIf="form.get('name')!.errors?.['maxlength']">
+          Назва не може бути довшою за 70 символів
+        </div>
+        <div *ngIf="form.get('name')!.errors?.['pattern']">
+          Назва містить недопустимі символи
+        </div>
+
       </div>
     </div>
     <div
       class="form-control"
-      [ngClass]="{invalid: form.get('type')?.touched && form.get('type')!.invalid}"
     >
       <label for="type" class="form-label">Тип:</label>
       <select class="form-input" id="type" formControlName="type">
+        <option [ngValue]="null" disabled>Оберіть тип</option>
         <option *ngFor="let type of serviceTypes">{{type.name}}</option>
       </select>
-      <div
-        *ngIf="form.get('type')!.touched! && form.get('type')!.invalid"
-        class="validation"
-      >
-        <small *ngIf="form.get('type')?.errors?.['required']">
-          Введіть поле тип
-        </small>
-      </div>
     </div>
     <div
       class="form-control"
       [ngClass]="{invalid: form.get('price')?.touched && form.get('price')!.invalid}"
     >
       <label for="price" class="form-label">Ціна:</label>
-      <input class="form-input" id="price" type="number" formControlName="price">
+      <input class="form-input" autocomplete="off" id="price" type="number" formControlName="price" min="1" max="500000">
       <div
         *ngIf="form.get('price')!.touched! && form.get('price')!.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('price')!.errors?.['required']">
+        <div *ngIf="form.get('price')!.errors?.['required']">
           Введіть поле ціна
-        </small>
+        </div>
+        <div *ngIf="form.get('price')!.errors?.['min']">
+          Ціна не може бути менше 1
+        </div>
+        <div *ngIf="form.get('price')!.errors?.['max']">
+          Ціна не може бути більше 500000
+        </div>
       </div>
+
     </div>
     <div
       class="form-control"
       [ngClass]="{invalid: form.get('description')?.touched && form.get('description')!.invalid}"
     >
       <label for="description" class="form-label">Опис:</label>
-      <input class="form-input" id="description" type="text" formControlName="description">
+      <input class="form-input" id="description" type="text" formControlName="description" maxlength="70">
     </div>
 
     <div class="button-section">

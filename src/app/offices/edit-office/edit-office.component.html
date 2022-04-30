@@ -1,7 +1,7 @@
 <div class="form-wrapper" *ngIf="form; else loader">
   <form class="card" [formGroup]="form" (ngSubmit)="submit()" >
     <div class ="form-header">
-      <h2>Створення посади</h2>
+      <h2>Редагування офісу</h2>
       <svg [routerLink]="['/offices']"
            class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z" fill="rgba(53,48,47,1)"/></svg>
     </div>
@@ -15,9 +15,18 @@
         *ngIf="form.get('address')!.touched! && form.get('address')!.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('address')!.errors?.['required']">
+        <div *ngIf="form.get('address')!.errors?.['required']">
           Введіть поле адреса
-        </small>
+        </div>
+        <div *ngIf="form.get('address')!.errors?.['minlength'] && !form.get('address')!.errors?.['pattern']">
+          Адреса має бути довшою за 4 символи
+        </div>
+        <div *ngIf="form.get('address')!.errors?.['maxlength'] && !form.get('address')!.errors?.['pattern']">
+          Адреса не може бути довшою за 50 символів
+        </div>
+        <div *ngIf="form.get('address')!.errors?.['pattern']">
+          Адреса містить недопустимі символи
+        </div>
       </div>
     </div>
     <div
@@ -32,7 +41,12 @@
           {{city.name}}
         </option>
       </select>
-
+      <div
+        *ngIf="form.get('city')?.touched! && form.get('city')?.invalid"
+        class="validation"
+      >
+        Оберіть місто
+      </div>
     </div>
 
     <div class="button-section">
@@ -40,7 +54,7 @@
         type="submit"
         class="form-submit-btn"
         [disabled]="form.invalid || submitted"
-      >Створити</button>
+      >Зберегти</button>
     </div>
   </form>
 </div>

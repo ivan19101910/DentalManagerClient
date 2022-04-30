@@ -53,32 +53,40 @@
 <!--  <div class="header-body">-->
 <!--    <div class="name">DentalManager</div>-->
 <header>
-  <ul class="topmenu">
+  <div class="topmenu">
 <!--    <li>DentalManager</li>-->
-    <li><a href="" [routerLink]="['/services']">Послуги</a>
+<!--    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(255,255,255,1)"/></svg>-->
+      <div class="logo"><a>DentaLManager</a></div>
+      <div class="items-wrapper">
+        <li><a href="" [routerLink]="['/services']">Послуги</a>
       <ul class="submenu">
         <li><a href="" [routerLink]="['/serviceTypes']">Типи послуг</a></li>
       </ul>
-    </li>
-    <li><a href="" [routerLink]="['/patients']">Пацієнти</a>
-    </li>
-    <li><a href="" [routerLink]="['/appointments']">Прийоми</a>
+      </li>
+      <li class="right-align"><a href="" [routerLink]="['/patients']">Пацієнти</a>
+      </li>
+      <li class="right-align"><a href="" [routerLink]="['/appointments']">Прийоми</a>
       <ul class="submenu">
         <li><a href="" [routerLink]="['/appointmentStatuses']">Статуси</a></li>
         <li><a href="" [routerLink]="['/appointmentPayments']">Оплати</a></li>
       </ul>
-    </li>
-    <li><a href="" [routerLink]="['/workers']">Працівники</a>
+      </li>
+      <li class="right-align"><a href="" [routerLink]="['/workers']">Працівники</a>
       <ul class="submenu">
         <li><a href="" [routerLink]="['/salaryPayments']">Зарплати</a></li>
         <li><a href="" [routerLink]="['/offices']">Офіси</a></li>
         <li><a href="" [routerLink]="['/cities']">Міста</a></li>
         <li><a href="" [routerLink]="['/positions']">Посади</a></li>
         <li><a href="" [routerLink]="['/schedules']">Розклади</a></li>
-<!--        <li><a href="" [routerLink]="['/workerSchedules']">Розклади робітників</a></li>-->
+        <!--        <li><a href="" [routerLink]="['/workerSchedules']">Розклади робітників</a></li>-->
       </ul>
-    </li>
-  </ul>
+      </li>
+    </div>
+    <div class="plug">
+
+    </div>
+
+  </div>
 </header>
 
 <!--  </div>-->

@@ -5,6 +5,7 @@ import {Subscription, switchMap} from "rxjs";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {CitiesService} from "../../cities/cities.service";
 import {PositionService} from "../position.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-edit-position',
@@ -33,9 +34,21 @@ export class EditPositionComponent implements OnInit, OnDestroy {
     ).subscribe((position: Position) => {
       this.position = position
       this.form = new FormGroup({
-        name: new FormControl(position.positionName, Validators.required),
-        baseRate: new FormControl(position.baseRate, Validators.required),
-        appointmentPercentage: new FormControl(position.appointmentPercentage, Validators.required)
+        name: new FormControl(position.positionName, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(30),
+          Validators.pattern(environment.NAME_REGEX)]),
+        baseRate: new FormControl(position.baseRate, [
+          Validators.required,
+          Validators.min(0),
+          Validators.max(1000000),
+          Validators.pattern(environment.PRICE_REGEX)]),
+        appointmentPercentage: new FormControl(position.appointmentPercentage, [
+          Validators.required,
+          Validators.min(0),
+          Validators.max(100),
+          Validators.pattern(environment.PRICE_REGEX)])
       })
 
     })

@@ -4,6 +4,7 @@ import {AppointmentPayment, AppointmentStatus} from "../../shared/interfaces";
 import {Subscription, switchMap} from "rxjs";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {AppointmentPaymentService} from "../appointment-payment.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-edit-appointment-payment',
@@ -32,8 +33,15 @@ export class EditAppointmentPaymentComponent implements OnInit, OnDestroy {
     ).subscribe((appointmentPayment: AppointmentPayment) => {
       this.payment = appointmentPayment
       this.form = new FormGroup({
-        appointmentId: new FormControl(appointmentPayment.appointmentId, Validators.required),
-        total: new FormControl(appointmentPayment.total, Validators.required)
+        appointmentId: new FormControl(appointmentPayment.appointmentId, [
+          Validators.required,
+          Validators.min(0),
+          Validators.pattern(environment.PRICE_REGEX)]),
+        total: new FormControl(appointmentPayment.total, [
+          Validators.required,
+          Validators.min(1),
+          Validators.max(10000000),
+          Validators.pattern(environment.PRICE_REGEX)])
       })
 
     })

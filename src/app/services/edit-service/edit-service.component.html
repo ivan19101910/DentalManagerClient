@@ -15,9 +15,7 @@
         *ngIf="form.get('name')?.touched! && form.get('name')?.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('name')?.errors?.['required']">
           Введіть поле ім'я
-        </small>
       </div>
     </div>
     <div
@@ -26,15 +24,14 @@
     >
       <label for="type" class="form-label">Тип:</label>
       <select class="form-input" id="type" formControlName="type">
+        <option [ngValue]="null" disabled>Оберіть посаду</option>
         <option *ngFor="let type of serviceTypes">{{type.name}}</option>
       </select>
       <div
         *ngIf="form.get('type')!.touched! && form.get('type')!.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('type')?.errors?.['required']">
           Введіть поле тип
-        </small>
       </div>
     </div>
     <div
@@ -42,14 +39,12 @@
       [ngClass]="{invalid: form.get('price')?.touched && form.get('price')!.invalid}"
     >
       <label for="price" class="form-label">Ціна:</label>
-      <input class="form-input" id="price" type="number" formControlName="price">
+      <input class="form-input" autocomplete="off" id="price" type="number" formControlName="price">
       <div
         *ngIf="form.get('price')!.touched! && form.get('price')!.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('price')!.errors?.['required']">
           Введіть поле ціна
-        </small>
       </div>
     </div>
     <div

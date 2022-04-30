@@ -39,6 +39,8 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
   filteredServices?: Service[]
   serviceTypes?: ServiceType[]
   patients?: Patient[]
+  totalPrice: number = 0
+  pageNumber: number = 1
 
   workerId?: number
   patientId?: number
@@ -112,6 +114,7 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
 
     if (existingAppointmentService) {
       existingAppointmentService.amount += this.form.value.amount
+      this.totalPrice += existingAppointmentService.servicePrice
     } else {
       let appointmentService: AppointmentServiceCreate =
         {
@@ -121,6 +124,7 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
           amount: this.form.value.amount
         };
       this.appointmentServices?.push(appointmentService)
+      this.totalPrice += appointmentService.servicePrice * appointmentService.amount
     }
 
   }
@@ -128,10 +132,15 @@ export class CreateAppointmentComponent implements OnInit, OnDestroy {
   removeAppointmentService(appointmentService: AppointmentServiceCreate):  void{
     const index = this.appointmentServices.indexOf(appointmentService)
     this.appointmentServices.splice(index, 1)
+    this.totalPrice -= appointmentService.servicePrice * appointmentService.amount
   }
 
   filterServices(){
     this.filteredServices = this.services?.filter(val => val.serviceTypeName == this.form.value.serviceType)
+  }
+
+  changePage(pageNumber: number){
+    this.pageNumber = pageNumber
   }
 
   submit() {

@@ -15,9 +15,18 @@
         *ngIf="form.get('name')!.touched! && form.get('name')!.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('name')!.errors?.['required']">
+        <div *ngIf="form.get('name')!.errors?.['required']">
           Введіть поле назва
-        </small>
+        </div>
+        <div *ngIf="form.get('name')!.errors?.['minlength'] && !form.get('name')!.errors?.['pattern']">
+          Назва має бути довшою за 1 символ
+        </div>
+        <div *ngIf="form.get('name')!.errors?.['maxlength']">
+          Назва не може бути довшою за 30 символів
+        </div>
+        <div *ngIf="form.get('name')!.errors?.['pattern'] ">
+          Назва містить недопустимі символи
+        </div>
       </div>
     </div>
     <div class="button-section">
@@ -25,7 +34,7 @@
         type="submit"
         class="form-submit-btn"
         [disabled]="form.invalid || submitted"
-      >Створити</button>
+      >Зберегти</button>
     </div>
   </form>
 </div>

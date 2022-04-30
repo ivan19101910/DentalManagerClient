@@ -1,82 +1,57 @@
 <div class="show-wrapper">
   <div *ngIf="services; else loader" class="services-all">
-<!--  <div class="services-all">-->
     <div class="filter-section">
-      <input class="filter-input" (keyup)="applyFilter($event)" type="text" placeholder="Пошук" [(ngModel)]="searchString">
+      <input class="filter-input" placeholder="Назва" type="text" [(ngModel)]="nameSearchField">
+<!--      <input class="filter-input" placeholder="Тип" type="text" [(ngModel)]="typeSearchField">-->
+      <select class="filter-select" [(ngModel)]="typeSearchField" style="color:gray" onclick="this.style.color='black'">
+        <option value="" selected hidden>Тип</option>
+        <option *ngFor="let serviceType of serviceTypes">{{serviceType.name}}</option>
+      </select>
+<!--      <mat-form-field appearance="fill">-->
+<!--        <mat-label>Favorite food</mat-label>-->
+<!--        <mat-select class="filter-select">-->
+<!--          <mat-option *ngFor="let serviceType of serviceTypes" [value]="serviceType.name">-->
+<!--            {{serviceType.name}}-->
+<!--          </mat-option>-->
+<!--        </mat-select>-->
+<!--      </mat-form-field>-->
+      <input class="filter-input" placeholder="Ціна" type="number" [(ngModel)]="priceSearchField">
+      <button class="search-button" (click)="filter()">Знайти</button>
+      <button class="clear-button" (click)="clearFilter()">Очистити</button>
     </div>
-<!--    <table class="service-table">-->
-<!--      <thead>-->
-<!--      <tr>-->
-<!--        <th class="service-el-header">Послуга</th>-->
-<!--        <th class="service-el-header">Тип</th>-->
-<!--        <th class="service-el-header">Ціна</th>-->
-<!--        <th></th>-->
-<!--      </tr>-->
-<!--      </thead>-->
-<!--      <tbody>-->
-<!--      <tr *ngFor="let service of services | paginate: { itemsPerPage: 10, currentPage: page} | filter: search : 'name'">-->
-<!--        <td class="service-el">{{service.name}}</td>-->
-<!--        <td class="service-el">{{service.serviceTypeName}}</td>-->
-<!--        <td class="service-el">{{service.price}}</td>-->
-<!--        <td class="action-section">-->
-<!--          <svg class="edit-icon" [routerLink]="['/services', 'edit', service.id]" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 19h1.414l9.314-9.314-1.414-1.414L5 17.586V19zm16 2H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L9.243 19H21v2zM15.728 6.858l1.414 1.414 1.414-1.414-1.414-1.414-1.414 1.414z" fill="rgba(53,48,47,1)"/></svg>-->
-<!--          <svg class="delete-icon" (click)="remove(service.id)" viewBox="0 0 24 24" width="32" height="32" ><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-4.586 6l1.768 1.768-1.414 1.414L12 15.414l-1.768 1.768-1.414-1.414L10.586 14l-1.768-1.768 1.414-1.414L12 12.586l1.768-1.768 1.414 1.414L13.414 14zM9 4v2h6V4H9z" fill="rgba(53,48,47,1)"/></svg>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      </tbody>-->
-<!--    </table>-->
-    <table mat-table [dataSource]="dataSource" class="service-table">
-
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-
-      <!-- Position Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell class="service-el-header" *matHeaderCellDef>Послуга</th>
-        <td mat-cell class="service-el" *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="serviceTypeName">
-        <th mat-header-cell class="service-el-header" *matHeaderCellDef>Тип</th>
-        <td mat-cell class="service-el" *matCellDef="let element "> {{element.serviceTypeName}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="price">
-        <th mat-header-cell class="service-el-header" *matHeaderCellDef>Ціна</th>
-        <td mat-cell class="service-el" *matCellDef="let element"> {{element.price}} </td>
-      </ng-container>
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell class="action-section" *matCellDef="let element ">
-          <div class="icons">
-            <svg class="edit-icon" [routerLink]="['/services', 'edit', element.id]" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 19h1.414l9.314-9.314-1.414-1.414L5 17.586V19zm16 2H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L9.243 19H21v2zM15.728 6.858l1.414 1.414 1.414-1.414-1.414-1.414-1.414 1.414z" fill="rgba(53,48,47,1)"/></svg>
-            <svg class="delete-icon" (click)="remove(element.id)" viewBox="0 0 24 24" width="32" height="32" ><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-4.586 6l1.768 1.768-1.414 1.414L12 15.414l-1.768 1.768-1.414-1.414L10.586 14l-1.768-1.768 1.414-1.414L12 12.586l1.768-1.768 1.414 1.414L13.414 14zM9 4v2h6V4H9z" fill="rgba(53,48,47,1)"/></svg>
+    <table class="service-table">
+      <thead>
+      <tr>
+        <th class="service-el-header">Послуга</th>
+        <th class="service-el-header">Тип</th>
+        <th class="service-el-header">Ціна</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let service of filteredServices | paginate: { itemsPerPage: 10, currentPage: page}">
+        <td class="service-el">{{service.name}}</td>
+        <td class="service-el">{{service.serviceTypeName}}</td>
+        <td class="service-el">{{service.price}}</td>
+        <td class="action-section">
+          <div class="action-section-container">
+            <svg class="edit-icon" [routerLink]="['/services', 'edit', service.id]" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 19h1.414l9.314-9.314-1.414-1.414L5 17.586V19zm16 2H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L9.243 19H21v2zM15.728 6.858l1.414 1.414 1.414-1.414-1.414-1.414-1.414 1.414z" fill="rgba(53,48,47,1)"/></svg>
+            <svg class="delete-icon" (click)="remove(service.id)" viewBox="0 0 24 24" width="32" height="32" ><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-4.586 6l1.768 1.768-1.414 1.414L12 15.414l-1.768 1.768-1.414-1.414L10.586 14l-1.768-1.768 1.414-1.414L12 12.586l1.768-1.768 1.414 1.414L13.414 14zM9 4v2h6V4H9z" fill="rgba(53,48,47,1)"/></svg>
           </div>
         </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row class="trow" *matRowDef="let row ; columns: displayedColumns; "></tr>
-
+      </tr>
+      </tbody>
     </table>
 
 
-  </div>
-  <mat-paginator [pageSizeOptions]="[5]"
-                 showFirstLastButtons
-  >
-  </mat-paginator>
+</div>
   <div class="bottom-section">
     <button class="create-button" [routerLink]="['/services', 'create']">
       Створити послугу</button>
-<!--    <pagination-controls class="pagination-controls" previousLabel=""-->
-<!--                         nextLabel=""-->
-<!--                         (pageChange)="page = $event"></pagination-controls>-->
-
+    <pagination-controls class="pagination-controls" previousLabel=""
+                         nextLabel=""
+                         (pageChange)="page = $event"></pagination-controls>
   </div>
-</div>
-
 
 <ng-template #loader>
   <p class="text-center">Завантаження...</p>

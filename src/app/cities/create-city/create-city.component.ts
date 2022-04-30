@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 import {AppointmentStatus, City} from "../../shared/interfaces";
 import {Subscription} from "rxjs";
 import {CitiesService} from "../cities.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-create-city',
@@ -26,7 +27,11 @@ export class CreateCityComponent implements OnDestroy {
     private http: HttpClient
   ) {
     this.form = new FormGroup({
-      name: new FormControl(null, Validators.required)
+      name: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(30),
+        Validators.pattern(environment.NAME_REGEX)])
     })
   }
 

@@ -6,6 +6,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {PositionService} from "../../positions/position.service";
 import {CitiesService} from "../../cities/cities.service";
 import {OfficeService} from "../office.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-edit-office',
@@ -37,7 +38,11 @@ export class EditOfficeComponent implements OnInit, OnDestroy {
     ).subscribe((office: ShowOffice) => {
       this.office = office
       this.form = new FormGroup({
-        address: new FormControl(office.address, Validators.required),
+        address: new FormControl(office.address, [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(50),
+          Validators.pattern(environment.SERVICENAME_REGEX)]),
         city: new FormControl(null, Validators.required),
       })
       this.cityId = office.cityId

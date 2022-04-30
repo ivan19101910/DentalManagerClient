@@ -37,6 +37,7 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
   appointment?: AppointmentFull
   workerId?: number
   patientId?: number
+  pageNumber: number = 1
 
   appointmentServices: AppointmentServiceEdit[] = []
 
@@ -119,6 +120,10 @@ export class EditAppointmentComponent implements OnInit, OnDestroy {
         this.workerAcc = worker;
       })
 
+  }
+
+  changePage(pageNumber: number){
+    this.pageNumber = pageNumber
   }
 
   ngOnDestroy(): void {

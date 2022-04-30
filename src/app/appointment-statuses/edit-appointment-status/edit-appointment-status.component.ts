@@ -4,6 +4,7 @@ import {AppointmentStatus} from "../../shared/interfaces";
 import {Subscription, switchMap} from "rxjs";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {AppointmentStatusService} from "../appointment-status.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-edit-appointment-status',
@@ -33,7 +34,11 @@ export class EditAppointmentStatusComponent implements OnInit, OnDestroy {
     ).subscribe((appointmentStatus: AppointmentStatus) => {
       this.status = appointmentStatus
       this.form = new FormGroup({
-        name: new FormControl(appointmentStatus.name, Validators.required),
+        name: new FormControl(appointmentStatus.name, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(30),
+          Validators.pattern(environment.NAME_REGEX)]),
       })
 
     })

@@ -1,0 +1,65 @@
+<div class="form-wrapper" *ngIf="form; else loader">
+  <form class="card" [formGroup]="form" (ngSubmit)="submit()" >
+    <div class ="form-header">
+      <h2>Створення розкладу</h2>
+      <svg [routerLink]="['/schedules']"
+           class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z" fill="rgba(53,48,47,1)"/></svg>
+    </div>
+
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('day')?.touched && form.get('day')!.invalid}"
+    >
+      <label for="day" class="form-label">День:</label>
+      <select class="form-input" id="day" formControlName="day" [(ngModel)]="dayId">
+        <option [ngValue]="null" disabled>Оберіть день:</option>
+        <option *ngFor="let day of days" [ngValue]="day.id">
+          {{day.name}}
+        </option>
+      </select>
+      <div
+        *ngIf="form.get('day')?.touched! && form.get('day')?.invalid"
+        class="validation"
+      >
+        Оберіть день
+      </div>
+    </div>
+
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('timeSegment')?.touched && form.get('timeSegment')!.invalid}"
+    >
+      <label for="timeSegment" class="form-label">Час:</label>
+
+      <select class="form-input" id="timeSegment" formControlName="timeSegment" [(ngModel)]="timeSegmentId">
+        <option [ngValue]="null" disabled>Оберіть відрізок часу</option>
+        <option *ngFor="let timeSegment of timeSegments" [ngValue]="timeSegment.id">
+          {{timeSegment.timeStart}} - {{timeSegment.timeEnd}}
+        </option>
+      </select>
+      <div
+        *ngIf="form.get('timeSegment')?.touched! && form.get('timeSegment')?.invalid"
+        class="validation"
+      >
+        Оберіть відрізок часу
+      </div>
+    </div>
+
+    <div class="button-section">
+      <button
+        type="submit"
+        class="form-submit-btn"
+        [disabled]="form.invalid || submitted"
+      >Створити</button>
+    </div>
+  </form>
+</div>
+
+<ng-template #loader>
+  <p class="text-center">Завантаження...</p>
+</ng-template>
+
+
+
+
+

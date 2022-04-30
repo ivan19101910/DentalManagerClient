@@ -5,6 +5,7 @@ import {AuthService} from "../../shared/services/auth.service";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {AppointmentPaymentService} from "../appointment-payment.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-create-appointment-payment',
@@ -24,8 +25,15 @@ export class CreateAppointmentPaymentComponent implements OnInit, OnDestroy {
     private http: HttpClient
   ) {
     this.form = new FormGroup({
-      appointmentId: new FormControl(null, Validators.required),
-      total: new FormControl(null, Validators.required)
+      appointmentId: new FormControl(null, [
+        Validators.required,
+        Validators.min(0),
+        Validators.pattern(environment.PRICE_REGEX)]),
+      total: new FormControl(null, [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(10000000),
+        Validators.pattern(environment.PRICE_REGEX)])
     })
   }
 

@@ -55,16 +55,47 @@ export class CreateWorkerComponent implements OnInit {
     })
 
     this.form = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      email: new FormControl(null, Validators.required),
-      address: new FormControl(null, Validators.required),
-      password: new FormControl(null, Validators.required),
-      phoneNumber: new FormControl(null, Validators.required),
-      position: new FormControl(null),
+      name: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(30),
+        Validators.pattern(environment.NAME_REGEX)]),
+      lastName: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(30),
+        Validators.pattern(environment.NAME_REGEX)]),
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.email]),
+      address: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(50),
+        Validators.pattern(environment.SERVICENAME_REGEX)]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(6)]),
+      phoneNumber: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10),
+        Validators.pattern(environment.PHONENUMBER_REGEX)]),
+      position: new FormControl(null, Validators.required),
       city: new FormControl(null),
       officeAddress: new FormControl(null),
       schedule: new FormControl(null)
+    })
+  }
+  ngOnInit(): void {
+    this.oSub = this.workerService.getAllOffices().subscribe(offices => {
+      this.offices = offices;
+    })
+    this.pSub = this.workerService.getAllPositions().subscribe(positions => {
+      this.positions = positions;
+    })
+    this.cSub = this.workerService.getAllCities().subscribe(cities => {
+      this.cities = cities;
     })
   }
 
@@ -100,7 +131,7 @@ export class CreateWorkerComponent implements OnInit {
           workerId: 0,
           schedule: schedule,
           worker: undefined
-        };
+        }
       this.workerSchedules?.push(workerSchedule)
     }
     else{
@@ -112,18 +143,6 @@ export class CreateWorkerComponent implements OnInit {
   removeWorkerSchedule(workerSchedule: WorkerSchedule):  void{
     const index = this.workerSchedules!.indexOf(workerSchedule)
     this.workerSchedules!.splice(index, 1)
-  }
-
-  ngOnInit(): void {
-    this.oSub = this.workerService.getAllOffices().subscribe(offices => {
-      this.offices = offices;
-    })
-    this.pSub = this.workerService.getAllPositions().subscribe(positions => {
-      this.positions = positions;
-    })
-    this.cSub = this.workerService.getAllCities().subscribe(cities => {
-      this.cities = cities;
-    })
   }
 
   submit() {

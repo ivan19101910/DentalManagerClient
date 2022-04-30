@@ -15,9 +15,18 @@
         *ngIf="form.get('name')!.touched! && form.get('name')!.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('name')!.errors?.['required']">
+        <div *ngIf="form.get('name')!.errors?.['required']">
           Введіть поле назва
-        </small>
+        </div>
+        <div *ngIf="form.get('name')!.errors?.['minlength'] && !form.get('name')!.errors?.['pattern']">
+          Назва має бути довшою за 1 символ
+        </div>
+        <div *ngIf="form.get('name')!.errors?.['maxlength']">
+          Назва не може бути довшою за 30 символів
+        </div>
+        <div *ngIf="form.get('name')!.errors?.['pattern'] ">
+          Назва містить недопустимі символи
+        </div>
       </div>
     </div>
     <div
@@ -30,9 +39,18 @@
         *ngIf="form.get('baseRate')!.touched! && form.get('baseRate')!.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('baseRate')!.errors?.['required']">
+        <div *ngIf="form.get('baseRate')!.errors?.['required'] && !form.get('baseRate')!.errors?.['pattern']">
           Введіть поле базова ставка
-        </small>
+        </div>
+        <div *ngIf="form.get('baseRate')!.errors?.['min'] && !form.get('baseRate')!.errors?.['pattern']">
+          Базова ставка не може бути менше 0
+        </div>
+        <div *ngIf="form.get('baseRate')!.errors?.['max'] && !form.get('baseRate')!.errors?.['pattern']">
+          Базова ставка не може бути більше 1000000
+        </div>
+        <div *ngIf="form.get('baseRate')!.errors?.['pattern']">
+          Базова ставка містить недопустимі символи
+        </div>
       </div>
     </div>
     <div
@@ -45,9 +63,18 @@
         *ngIf="form.get('appointmentPercentage')!.touched! && form.get('appointmentPercentage')!.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('appointmentPercentage')!.errors?.['required']">
+        <div *ngIf="form.get('appointmentPercentage')!.errors?.['required'] && !(form.get('appointmentPercentage')!.errors?.['pattern'])">
           Введіть поле відсоток від прийому
-        </small>
+        </div>
+        <div *ngIf="form.get('appointmentPercentage')!.errors?.['min'] && !form.get('appointmentPercentage')!.errors?.['pattern']">
+          Відсоток від прийому не може бути менше 0
+        </div>
+        <div *ngIf="form.get('appointmentPercentage')!.errors?.['max'] && !form.get('appointmentPercentage')!.errors?.['pattern']">
+          Відсоток від прийому не може бути більше 100
+        </div>
+        <div *ngIf="form.get('appointmentPercentage')!.errors?.['pattern']">
+          Відсоток від прийому містить недопустимі символи
+        </div>
       </div>
     </div>
     <div class="button-section">

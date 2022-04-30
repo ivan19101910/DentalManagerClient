@@ -23,6 +23,7 @@ export class CreateSalaryPaymentComponent implements OnDestroy {
   wSub?: Subscription
   workerId?: number
   workers?: ShowWorker[]
+  salary?: number
 
   constructor(
     public auth: AuthService,
@@ -32,7 +33,7 @@ export class CreateSalaryPaymentComponent implements OnDestroy {
     private http: HttpClient
   ) {
     this.wSub = workerService.getAll().subscribe(cities => {
-      this.workers = cities;
+      this.workers = cities
     })
 
     this.form = new FormGroup({
@@ -57,6 +58,11 @@ export class CreateSalaryPaymentComponent implements OnDestroy {
       this.form.reset()
       this.router.navigate(['/salaryPayments'])
       this.submitted = false
+    })
+  }
+  getSalary(): void{
+    this.workerService.getSalaryById(this.workerId!, this.form.value.monthNumber, this.form.value.year).subscribe(salary =>{
+      this.salary = salary
     })
   }
 

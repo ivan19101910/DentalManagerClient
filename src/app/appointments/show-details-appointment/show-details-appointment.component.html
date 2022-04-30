@@ -1,0 +1,50 @@
+<div class="wrapper">
+  <div class="appointment-header">
+    Прийом №{{appointment?.id}}
+    <svg class="edit-icon" [routerLink]="['/appointments', 'edit', appointment?.id]" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 19h1.414l9.314-9.314-1.414-1.414L5 17.586V19zm16 2H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L9.243 19H21v2zM15.728 6.858l1.414 1.414 1.414-1.414-1.414-1.414-1.414 1.414z" fill="rgba(53,48,47,1)"/></svg>
+    <svg class="delete-icon" (click)="remove(appointment!.id)" viewBox="0 0 24 24" width="32" height="32" ><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-4.586 6l1.768 1.768-1.414 1.414L12 15.414l-1.768 1.768-1.414-1.414L10.586 14l-1.768-1.768 1.414-1.414L12 12.586l1.768-1.768 1.414 1.414L13.414 14zM9 4v2h6V4H9z" fill="rgba(53,48,47,1)"/></svg>
+  </div>
+  <div class="appointment-info">
+    <p>Дата прийому: {{appointment?.appointmentDate | date:'dd/MM/yyyy'}}</p>
+    <p>Час початку - час кінця: {{appointment?.appointmentTime}} - {{appointment?.realEndTime}}</p>
+    <p>Статус: {{appointment?.status?.name}}</p>
+    <p>Сума за прийом: {{appointment?.totalSum}}</p>
+  </div>
+  <div class="vertical-block">
+    <div class="patient-info">
+      <p class="patient-header">Пацієнт:</p>
+      <p class="link" [routerLink]="['/patients', 'details', appointment?.patientId]">{{appointment?.patient?.firstName}} {{appointment?.patient?.lastName}}</p>
+    </div>
+    <div class="worker-info">
+      <p class="worker-header">Лікар:</p>
+      <p class="link" [routerLink]="['/workers', 'details', appointment?.workerId]">{{appointment?.worker?.firstName}} {{appointment?.worker?.lastName}}</p>
+      <p>{{appointment?.worker?.positionName}}</p>
+    </div>
+  </div>
+  <div class="notes">
+    <p class="notes-header">Примітки:</p>
+    <p>{{appointment?.notes}} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut blanditiis consectetur consequuntur culpa deleniti dolore ea eius enim expedita, natus nesciunt perspiciatis quas qui quia, reiciendis rem sit sunt voluptatum? Consequatur culpa cum, fuga nam perferendis qui tempora? Architecto aut cum eius molestiae neque quam quidem veniam? Eaque eligendi esse iusto labore neque numquam provident. A ad assumenda deleniti fugiat, incidunt libero molestias, nam odit officia possimus quasi quo quod reprehenderit sint sunt? Ab accusantium corporis cum cumque debitis eum facilis inventore ipsum nam necessitatibus non perferendis, quia quibusdam quo quos sint vero. Corporis dolore maiores minus molestias quidem ratione? </p>
+  </div>
+  <div class="services">
+    <p class="services-header">Послуги:</p>
+    <table class="service-table">
+      <thead>
+      <tr>
+        <th class="service-el-header">Послуга</th>
+        <th class="service-el-header">К-сть</th>
+        <th class="service-el-header">Ціна</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let service of appointment!.appointmentServices | paginate: { itemsPerPage: 5, currentPage: page}">
+        <td class="service-el">{{service.serviceName}}</td>
+        <td class="service-el">{{service.amount}}</td>
+        <td class="service-el">{{service.servicePrice}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls class="pagination-controls" previousLabel=""
+                         nextLabel=""
+                         (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>

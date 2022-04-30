@@ -8,13 +8,14 @@
 .card{
   margin-top: 20px;
   width:40% ;
-  height: 500px;
+  height: 420px;
   border: solid 2px #35302F;
   border-radius: 50px;
   align-items: center;
   display: flex;
   flex-direction: column;
   min-width: 388px;
+  max-width: 388px;
   background-color: #DECBB7;
 }
 h2{
@@ -51,16 +52,10 @@ h2{
   align-self: center;
   display: block;
   padding-left: 5px;
+  width: 300px;
 }
 .form-control{
-  margin-top: 10px;
-  justify-content: center;
-  align-content: center;
-  height: 64px;
-  flex-direction: column;
-  justify-self: center;
-  display: flex;
-  width: 180px;
+  width: 300px;
 }
 .form-submit-btn{
   color: #35302F;

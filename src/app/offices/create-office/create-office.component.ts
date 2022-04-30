@@ -8,6 +8,7 @@ import {HttpClient} from "@angular/common/http";
 import {City, CreateOffice, Position} from "../../shared/interfaces";
 import {OfficeService} from "../office.service";
 import {CitiesService} from "../../cities/cities.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-create-office',
@@ -35,7 +36,11 @@ export class CreateOfficeComponent implements OnDestroy {
     })
 
     this.form = new FormGroup({
-      address: new FormControl(null, Validators.required),
+      address: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(50),
+        Validators.pattern(environment.SERVICENAME_REGEX)]),
       city: new FormControl(null, Validators.required)
     })
   }

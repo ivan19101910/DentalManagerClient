@@ -1,18 +1,19 @@
 <div class="form-wrapper" *ngIf="form; else loader">
   <form class="card" [formGroup]="form" (ngSubmit)="submit()" >
     <div class ="form-header">
-      <h2>Редагування робітника</h2>
+      <h2>Редагування працівника</h2>
       <svg [routerLink]="['/workers']"
-           class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z" fill="rgba(53,48,47,1)"/></svg>
+           class="close-icon" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z" fill="rgba(53,48,47,1)"/></svg>
     </div>
-
-    <div class="tab">
+    <div class="tab-bar">
       <div class="tablinks" (click)="changePage(1)">Основне</div>
       <div class="tablinks" (click)="changePage(2)">Розклад</div>
+      <div class="tablinks" (click)="changePage(3)">Офіс</div>
     </div>
     <div class="main-info"
          [ngStyle]="{
-      display: pageNumber == 1 ? 'block' : 'none'
+      display: pageNumber == 1 ? 'flex' : 'none',
+      height: '562px'
     }">
       <div
         class="form-control"
@@ -24,9 +25,18 @@
           *ngIf="form.get('name')?.touched! && form.get('name')?.invalid"
           class="validation"
         >
-          <small *ngIf="form.get('name')?.errors?.['required']">
+          <div *ngIf="form.get('name')!.errors?.['required']">
             Введіть поле ім'я
-          </small>
+          </div>
+          <div *ngIf="form.get('name')!.errors?.['minlength'] && !form.get('name')!.errors?.['pattern']">
+            Ім'я має бути довшим за 1 символ
+          </div>
+          <div *ngIf="form.get('name')!.errors?.['maxlength']">
+            Ім'я не може бути довшим за 30 символів
+          </div>
+          <div *ngIf="form.get('name')!.errors?.['pattern'] ">
+            Ім'я містить недопустимі символи
+          </div>
         </div>
       </div>
       <div
@@ -39,9 +49,18 @@
           *ngIf="form.get('lastName')?.touched! && form.get('lastName')?.invalid"
           class="validation"
         >
-          <small *ngIf="form.get('lastName')?.errors?.['required']">
-            Введіть поле прізвище
-          </small>
+          <div *ngIf="form.get('lastName')!.errors?.['required']">
+            Введіть прізвище
+          </div>
+          <div *ngIf="form.get('lastName')!.errors?.['maxlength']">
+            Прізвище не може бути довшим за 30 символів
+          </div>
+          <div *ngIf="form.get('lastName')!.errors?.['pattern']">
+            Прізвище містить недопустимі символи
+          </div>
+          <div *ngIf="form.get('lastName')!.errors?.['minlength'] && !form.get('lastName')!.errors?.['pattern']">
+            Прізвище має бути довшим за 1 символи
+          </div>
         </div>
       </div>
       <div
@@ -54,9 +73,15 @@
           *ngIf="form.get('email')?.touched! && form.get('email')?.invalid"
           class="validation"
         >
-          <small *ngIf="form.get('email')?.errors?.['required']">
-            Введіть поле емейл
-          </small>
+          <div *ngIf="form.get('email')!.errors?.['required']">
+            Введіть поле електронна пошта
+          </div>
+          <div *ngIf="form.get('email')!.errors?.['pattern']">
+            Адреса містить недопустимі символи
+          </div>
+          <div *ngIf="form.get('email')!.errors?.['email']">
+            Введіть поле електронна пошта
+          </div>
         </div>
       </div>
       <div
@@ -69,9 +94,18 @@
           *ngIf="form.get('address')?.touched! && form.get('address')?.invalid"
           class="validation"
         >
-          <small *ngIf="form.get('address')?.errors?.['required']">
+          <div *ngIf="form.get('address')!.errors?.['required']">
             Введіть поле адреса
-          </small>
+          </div>
+          <div *ngIf="form.get('address')!.errors?.['minlength'] && !form.get('address')!.errors?.['pattern']">
+            Адреса має бути довшою за 4 символи
+          </div>
+          <div *ngIf="form.get('address')!.errors?.['maxlength']">
+            Адреса не може бути довшою за 50 символів
+          </div>
+          <div *ngIf="form.get('address')!.errors?.['pattern']">
+            Адреса містить недопустимі символи
+          </div>
         </div>
       </div>
       <div
@@ -79,14 +113,17 @@
         [ngClass]="{invalid: form.get('password')?.touched && form.get('password')?.invalid}"
       >
         <label for="password" class="form-label">Пароль:</label>
-        <input class="form-input" id="password" type="text" formControlName="password">
+        <input class="form-input" id="password" type="password" formControlName="password">
         <div
           *ngIf="form.get('password')?.touched! && form.get('password')?.invalid"
           class="validation"
         >
-          <small *ngIf="form.get('password')?.errors?.['required']">
+          <div *ngIf="form.get('password')!.errors?.['required']">
             Введіть поле пароль
-          </small>
+          </div>
+          <div *ngIf="form.get('password')!.errors?.['minlength']">
+            Пароль має бути довшим за 6 символів
+          </div>
         </div>
       </div>
 
@@ -100,9 +137,18 @@
           *ngIf="form.get('phoneNumber')?.touched! && form.get('phoneNumber')?.invalid"
           class="validation"
         >
-          <small *ngIf="form.get('phoneNumber')?.errors?.['required']">
-            Введіть поле номер телефону
-          </small>
+          <div *ngIf="form.get('phoneNumber')!.errors?.['required']">
+            Введіть поле номер
+          </div>
+          <div *ngIf="form.get('phoneNumber')!.errors?.['minlength'] && !form.get('phoneNumber')!.errors?.['pattern']">
+            Номер має бути довжиною 10 символів
+          </div>
+          <div *ngIf="form.get('phoneNumber')!.errors?.['maxlength'] && !form.get('phoneNumber')!.errors?.['pattern']">
+            Номер має бути довжиною 10 символів
+          </div>
+          <div *ngIf="form.get('phoneNumber')!.errors?.['pattern']">
+            Номер містить недопустимі символи
+          </div>
         </div>
       </div>
       <div
@@ -116,33 +162,28 @@
         </select>
       </div>
       <div
-        class="form-control"
-        [ngClass]="{invalid: form.get('city')?.touched && form.get('city')!.invalid}"
+        *ngIf="form.get('position')?.touched! && form.get('position')?.invalid"
+        class="validation"
       >
-        <label for="city" class="form-label">Офіс:</label>
-        <label for="city" class="form-label">Місто:</label>
-        <select class="form-input" id="city" formControlName="city" (change)="filterOffices()">
-          <option [ngValue]="null" disabled>Оберіть місто</option>
-          <option *ngFor="let office of offices" [selected]="worker?.officeCity">{{office.cityName}}</option>
-        </select>
+        <div class="validation">
+          Оберіть посаду
+        </div>
       </div>
-      <div
-        class="form-control"
-        [ngClass]="{invalid: form.get('officeAddress')?.touched && form.get('officeAddress')!.invalid}"
-      >
-        <label for="officeAddress" class="form-label">Адреса:</label>
-        <select class="form-input" id="officeAddress" formControlName="officeAddress">
-          <option [ngValue]="null" disabled>Оберіть адресу офісу</option>
-          <option *ngFor="let office of filteredOffices" [selected]="worker?.officeAddress">{{office.address}}</option>
-        </select>
+      <div class="button-section">
+        <button
+          type="submit"
+          class="form-submit-btn"
+          [disabled]="form.invalid || submitted"
+        >Створити</button>
       </div>
     </div>
     <div class="schedule-info"
          [ngStyle]="{
-      display: pageNumber == 2 ? 'block' : 'none'
+      display: pageNumber == 2 ? 'flex' : 'none',
+      height: '463px'
     }">
       <div class="show-wrapper">
-        <div *ngIf="workerSchedules; else loader" class="services-all">
+        <div *ngIf="schedules; else loader" class="services-all">
           <table class="service-table">
             <thead>
             <tr>
@@ -162,6 +203,16 @@
             </tbody>
           </table>
         </div>
+
+
+
+      </div>
+      <div class="add-section">
+        <div class="form-horizontal-group">
+          <pagination-controls class="pagination-controls" previousLabel=""
+                               nextLabel=""
+                               (pageChange)="page = $event"></pagination-controls>
+        </div>
         <div
           class="form-control"
           [ngClass]="{invalid: form.get('schedule')?.touched && form.get('schedule')!.invalid}"
@@ -172,28 +223,41 @@
             <option [ngValue]="null" disabled>Оберіть розклад</option>
             <option *ngFor="let schedule of schedules" [ngValue]="schedule.id">{{schedule.day}} {{schedule.timeStart}}-{{schedule.timeEnd}}</option>
           </select>
-
         </div>
-        <div class="form-horizontal-group">
-          <div class="bottom-section">
-            <div class="create-button" (click)="addWorkerSchedule()">
-              Додати розклад</div>
-            <pagination-controls class="pagination-controls" previousLabel=""
-                                 nextLabel=""
-                                 (pageChange)="page = $event"></pagination-controls>
-          </div>
-
+        <div class="add-schedule-button" (click)="addWorkerSchedule()">
+          Додати розклад
         </div>
+      </div>
+
+    </div>
+    <div class="office-tab"
+         [ngStyle]="{
+      display: pageNumber == 3 ? 'flex' : 'none',
+      height: '180px'
+    }">
+      <div
+        class="form-control"
+        [ngClass]="{invalid: form.get('city')?.touched && form.get('city')!.invalid}"
+      >
+
+        <label for="city" class="form-label">Місто:</label>
+        <select class="form-input" id="city" formControlName="city" (change)="filterOffices()">
+          <option [ngValue]="null" disabled>Оберіть місто</option>
+          <option *ngFor="let office of offices">{{office.cityName}}</option>
+        </select>
+      </div>
+      <div
+        class="form-control"
+        [ngClass]="{invalid: form.get('officeAddress')?.touched && form.get('officeAddress')!.invalid}"
+      >
+        <label for="officeAddress" class="form-label">Адреса:</label>
+        <select class="form-input" id="officeAddress" formControlName="officeAddress">
+          <option [ngValue]="null" disabled>Оберіть адресу офісу</option>
+          <option *ngFor="let office of filteredOffices">{{office.address}}</option>
+        </select>
       </div>
     </div>
 
-    <div class="button-section">
-      <button
-        type="submit"
-        class="form-submit-btn"
-        [disabled]="form.invalid || submitted"
-      >Зберегти</button>
-    </div>
 
   </form>
 </div>
@@ -201,3 +265,4 @@
 <ng-template #loader>
   <p class="text-center">Завантаження...</p>
 </ng-template>
+

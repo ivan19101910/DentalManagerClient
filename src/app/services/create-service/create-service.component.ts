@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../shared/services/auth.service";
 import {Router} from "@angular/router";
@@ -14,7 +14,6 @@ import {ServiceService} from "../service.service";
   styleUrls: ['./create-service.component.scss']
 })
 export class CreateServiceComponent implements OnInit, OnDestroy {
-
   form: FormGroup
   submitted = false
   serviceTypes?: ServiceType[]
@@ -28,10 +27,21 @@ export class CreateServiceComponent implements OnInit, OnDestroy {
     private http: HttpClient
   ) {
     this.form = new FormGroup({
-      name: new FormControl(null, Validators.required),
+      name: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(70),
+        Validators.pattern(environment.SERVICENAME_REGEX)]),
       type: new FormControl(null, Validators.required),
-      price: new FormControl(null, Validators.required),
+      price: new FormControl(null, [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(500000)]),
       description: new FormControl(null)
+    })
+  }
+  ngOnInit(): void {
+    this.tSub = this.serviceService.getAllTypes().subscribe(types => {
+      this.serviceTypes = types;
     })
   }
 
@@ -39,12 +49,7 @@ export class CreateServiceComponent implements OnInit, OnDestroy {
         this.tSub?.unsubscribe()
     }
 
-  ngOnInit(): void {
-     this.tSub = this.serviceService.getAllTypes().subscribe(types => {
-      this.serviceTypes = types;
-    })
 
-  }
 
   submit() {
     let typeServiceId = this.serviceTypes!.find(val => val.name == this.form.value.type)!.id

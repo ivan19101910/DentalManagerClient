@@ -5,7 +5,12 @@
 export const environment = {
   production: false,
   serverUrl: 'https://localhost:7115/',
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE2NDI4NzA2NDAsImV4cCI6MTY0MzQ3NTQ0MCwiaWF0IjoxNjQyODcwNjQwfQ.BeRf9Rmb-rCZWJoPZStu3UeOnPsLP9grVHNGERtKQc4'
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE2NDI4NzA2NDAsImV4cCI6MTY0MzQ3NTQ0MCwiaWF0IjoxNjQyODcwNjQwfQ.BeRf9Rmb-rCZWJoPZStu3UeOnPsLP9grVHNGERtKQc4',
+  SERVICENAME_REGEX: /^[A-zА-яієїґІЄЇҐ0-9][A-zА-яієїґІЄЇҐ0-9\s-,']+$/,
+  //ADDRESS_REGEX: /^[A-zА-яієїґІЄЇҐ0-9\s-,']+$/,
+  NAME_REGEX: /^[А-яієїґІЄЇҐ\-']+$/,
+  PHONENUMBER_REGEX: /^[0-9]+$/,
+  PRICE_REGEX : /^[0-9]+$/
 };
 
 /*

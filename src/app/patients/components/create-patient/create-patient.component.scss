@@ -8,13 +8,14 @@
 .card{
   margin-top: 20px;
   width:40% ;
-  height: 550px;
+  height: 500px;
   border: solid 2px #35302F;
   border-radius: 50px;
   align-items: center;
   display: flex;
   flex-direction: column;
   min-width: 388px;
+  max-width: 388px;
   background-color: #DECBB7;
 }
 h2{
@@ -51,19 +52,7 @@ h2{
   align-self: center;
   display: block;
   padding-left: 5px;
-}
-.form-control{
-  //margin-top: 10px;
-  padding-top: 10px;
-  //justify-content: center;
-  //align-content: center;
-  justify-content: flex-start;
-  align-content: flex-start;
-  height: 90px;
-  flex-direction: column;
-  justify-self: center;
-  display: flex;
-  width: 180px;
+  width: 300px;
 }
 .form-submit-btn{
   color: #35302F;
@@ -78,7 +67,6 @@ h2{
   cursor: pointer;
 }
 .button-section{
-  //margin-top: 40px;
   justify-content: center;
   justify-self: flex-end;
   align-content: center;
@@ -89,4 +77,7 @@ h2{
 }
 .validation{
   font-size: 16px;
+}
+.form-control{
+  width: 300px;
 }

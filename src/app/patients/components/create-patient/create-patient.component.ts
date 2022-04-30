@@ -17,19 +17,34 @@ export class CreatePatientComponent implements OnInit{
   form: FormGroup
   submitted = false
 
-
-
   constructor(
     public auth: AuthService,
     private router: Router,
     private http: HttpClient
   ) {
     this.form = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      address: new FormControl(null, Validators.required),
+      name: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(30),
+        Validators.pattern(environment.NAME_REGEX)]),
+      lastName: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(30),
+        Validators.pattern(environment.NAME_REGEX)]),
+      address: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(50),
+        Validators.pattern(environment.SERVICENAME_REGEX)]),
       date: new FormControl(null, Validators.required),
-      phoneNumber: new FormControl(null, Validators.required),
+      phoneNumber: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10),
+        Validators.pattern(environment.PHONENUMBER_REGEX)]),
+
     })
   }
 

@@ -93,15 +93,34 @@ export class EditWorkerComponent implements OnInit {
       ).subscribe((worker: WorkerFull) => {
         this.worker = worker
         this.workerSchedules = worker.workerSchedules
-        console.log(this.workerSchedules)
         this.form = new FormGroup({
-          name: new FormControl(worker.firstName, Validators.required),
-          lastName: new FormControl(worker.lastName, Validators.required),
-          email: new FormControl(worker.email, Validators.required),
-          address: new FormControl(worker.address, Validators.required),
-          password: new FormControl(worker.password, Validators.required),
-          phoneNumber: new FormControl(worker.phoneNumber, Validators.required),
-          position: new FormControl(worker.positionName),
+          name: new FormControl(worker.firstName, [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(30),
+            Validators.pattern(environment.NAME_REGEX)]),
+          lastName: new FormControl(worker.lastName, [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(30),
+            Validators.pattern(environment.NAME_REGEX)]),
+          email: new FormControl(worker.email, [
+            Validators.required,
+            Validators.email]),
+          address: new FormControl(worker.address, [
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(50),
+            Validators.pattern(environment.SERVICENAME_REGEX)]),
+          password: new FormControl(worker.password, [
+            Validators.required,
+            Validators.minLength(6)]),
+          phoneNumber: new FormControl(worker.phoneNumber, [
+            Validators.required,
+            Validators.minLength(10),
+            Validators.maxLength(10),
+            Validators.pattern(environment.PHONENUMBER_REGEX)]),
+          position: new FormControl(worker.positionName, Validators.required),
           city: new FormControl(worker.officeCity),
           officeAddress: new FormControl(worker.officeAddress),
           schedule: new FormControl(null)

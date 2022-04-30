@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 *,
 *::before,
 *::after {
@@ -86,3 +87,69 @@ dd {
   //min-height: 100%;
   //height: 633px;
 }
+//input[type=number] {
+//  -moz-appearance: textfield;
+//}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.form-input:focus {
+  outline: none;
+}
+textarea, input, select{
+  outline: none;
+}
+.form-control{
+  //padding-top: 10px;
+  justify-content: flex-start;
+  align-content: flex-start;
+  height: 74px !important;
+  flex-direction: column;
+  justify-self: center;
+  display: flex;
+  //width: 180px;
+}
+.validation{
+  height: 14px !important;
+  font-size: 12px !important;
+  vertical-align: text-top;
+  color: red;
+}
+
+.form-submit-btn{
+  color: #35302F;
+  background-color: #8F857D;
+  border: solid 1px #35302F;
+  border-radius: 10px;
+  width: 160px;
+  height: 36px;
+  justify-self: center;
+  align-self: center;
+  font-size: 18px;
+  cursor: pointer;
+}
+.button-section{
+  margin-top: 10px;
+  justify-content: center;
+  justify-self: flex-end;
+  align-content: center;
+  height: 64px;
+  flex-direction: column;
+  display: flex;
+  width: 180px;
+}
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999 !important;
+  background-color: #cccccc !important;
+  color: #666666 !important;
+  cursor: default !important;
+}
+.action-section-container{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+

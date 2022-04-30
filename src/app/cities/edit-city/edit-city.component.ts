@@ -5,6 +5,7 @@ import {Subscription, switchMap} from "rxjs";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {AppointmentStatusService} from "../../appointment-statuses/appointment-status.service";
 import {CitiesService} from "../cities.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-edit-city',
@@ -33,7 +34,11 @@ export class EditCityComponent implements OnInit, OnDestroy {
     ).subscribe((city: City) => {
       this.city = city
       this.form = new FormGroup({
-        name: new FormControl(city.name, Validators.required),
+        name: new FormControl(city.name, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(30),
+          Validators.pattern(environment.NAME_REGEX)]),
       })
 
     })

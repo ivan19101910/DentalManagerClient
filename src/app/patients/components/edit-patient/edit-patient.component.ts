@@ -4,6 +4,7 @@ import {PatientService} from "../../services/patient.service";
 import {Subscription, switchMap} from "rxjs";
 import {Patient} from "../../../shared/interfaces";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-edit-patient',
@@ -32,11 +33,27 @@ export class EditPatientComponent implements OnInit, OnDestroy {
     ).subscribe((patient: Patient) => {
       this.patient = patient
       this.form = new FormGroup({
-        name: new FormControl(patient.firstName, Validators.required),
-        lastName: new FormControl(patient.lastName, Validators.required),
-        address: new FormControl(patient.address, Validators.required),
+        name: new FormControl(patient.firstName, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(30),
+          Validators.pattern(environment.NAME_REGEX)]),
+        lastName: new FormControl(patient.lastName, [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(30),
+          Validators.pattern(environment.NAME_REGEX)]),
+        address: new FormControl(patient.address, [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(50),
+          Validators.pattern(environment.SERVICENAME_REGEX)]),
         date: new FormControl(new Date(patient.dateOfBirth).toISOString().substr(0, 10), Validators.required),
-        phoneNumber: new FormControl(patient.phoneNumber, Validators.required),
+        phoneNumber: new FormControl(patient.phoneNumber, [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+          Validators.pattern(environment.PHONENUMBER_REGEX)]),
       })
 
     })

@@ -1,5 +1,12 @@
 <div class="show-wrapper">
   <div *ngIf="patients; else loader" class="patient-all">
+    <div class="filter-section">
+      <input class="filter-input" placeholder="Ім'я" type="text" [(ngModel)]="nameSearchField">
+      <input class="filter-input" placeholder="Прізвище" type="text" [(ngModel)]="surnameSearchField">
+      <input class="filter-input" placeholder="Дата" type="date" [(ngModel)]="dateSearchField">
+      <button class="search-button" (click)="filter()">Знайти</button>
+      <button class="clear-button" (click)="clearFilter()">Очистити</button>
+    </div>
     <table class="patient-table">
       <thead>
       <tr>
@@ -10,7 +17,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let patient of patients | paginate: { itemsPerPage: 10, currentPage: page}">
+      <tr *ngFor="let patient of filteredPatients | paginate: { itemsPerPage: 10, currentPage: page}">
         <td class="patient-el">{{patient.firstName}}</td>
         <td class="patient-el">{{patient.lastName}}</td>
         <td class="patient-el">{{patient.dateOfBirth | date:'dd/MM/yyyy'}}</td>

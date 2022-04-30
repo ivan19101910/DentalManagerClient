@@ -15,13 +15,43 @@ export class ShowAppointmentsComponent implements OnInit, OnDestroy {
   dSub?: Subscription
 
   page: number = 1;
+  //for search
+  filteredAppointments!: ShortAppointment[]
+
+  dataSearchField!: Date
+  workerSearchField!: string
+  patientSearchField!: string
+  //
 
   constructor(private appointmentService: AppointmentService) { }
 
   ngOnInit(): void {
     this.aSub = this.appointmentService.getAll().subscribe(appointments => {
       this.appointments = appointments
+      this.filteredAppointments = appointments
     })
+  }
+  filter(){
+    this.filteredAppointments = this.appointments!
+    if(this.dataSearchField){
+      // @ts-ignore
+      this.filteredAppointments = this.filteredAppointments!.filter(app => app.appointmentDate.substr(0, 10) == this.dataSearchField)
+    }
+    if(this.workerSearchField){
+      this.filteredAppointments = this.filteredAppointments!.filter(app => `${app.workerName} ${app.workerSurname}` == this.workerSearchField)
+    }
+    if(this.patientSearchField){
+      this.filteredAppointments = this.filteredAppointments!.filter(app => `${app.patientName} ${app.patientSurname}` == this.patientSearchField)
+    }
+  }
+  clearFilter(){
+    // @ts-ignore
+    this.patientSearchField = null
+    // @ts-ignore
+    this.workerSearchField = null
+    // @ts-ignore
+    this.dataSearchField = null
+    this.filteredAppointments = this.appointments!
   }
 
   ngOnDestroy(){
