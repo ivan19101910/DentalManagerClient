@@ -27,7 +27,7 @@ export class SalaryPaymentService{
   }
 
   create(payment: SalaryPayment): Observable<any>{
-    return this.http.post(`${environment.serverUrl}salaryPayment/create`, payment)
+    return this.http.post(`${environment.serverUrl}SalaryPayment/create`, payment)
   }
 
 }

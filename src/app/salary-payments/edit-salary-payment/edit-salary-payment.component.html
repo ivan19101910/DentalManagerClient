@@ -1,7 +1,7 @@
 <div class="form-wrapper" *ngIf="form; else loader">
   <form class="card" [formGroup]="form" (ngSubmit)="submit()" >
     <div class ="form-header">
-      <h2>Редагування зарплати</h2>
+      <h2>Редагування виплати</h2>
       <svg [routerLink]="['/salaryPayments']"
            class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z" fill="rgba(53,48,47,1)"/></svg>
     </div>
@@ -15,9 +15,18 @@
         *ngIf="form.get('monthNumber')!.touched! && form.get('monthNumber')!.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('monthNumber')!.errors?.['required']">
+        <div *ngIf="form.get('monthNumber')!.errors?.['required'] && !form.get('monthNumber')!.errors?.['pattern']">
           Введіть поле номер місяця
-        </small>
+        </div>
+        <div *ngIf="form.get('monthNumber')!.errors?.['min'] && !form.get('monthNumber')!.errors?.['pattern']">
+          Номер місяця не може бути менше 1
+        </div>
+        <div *ngIf="form.get('monthNumber')!.errors?.['max'] && !form.get('monthNumber')!.errors?.['pattern']">
+          Номер місяця не може бути більше 12
+        </div>
+        <div *ngIf="form.get('monthNumber')!.errors?.['pattern']">
+          Номер місяця містить недопустимі символи
+        </div>
       </div>
     </div>
     <div
@@ -30,9 +39,15 @@
         *ngIf="form.get('year')!.touched! && form.get('year')!.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('year')!.errors?.['required']">
+        <div *ngIf="form.get('year')!.errors?.['required'] && !form.get('year')!.errors?.['pattern']">
           Введіть поле рік
-        </small>
+        </div>
+        <div *ngIf="form.get('year')!.errors?.['min'] && !form.get('year')!.errors?.['pattern']">
+          Рік не може бути менше 2000
+        </div>
+        <div *ngIf="form.get('year')!.errors?.['pattern']">
+          Рік містить недопустимі символи
+        </div>
       </div>
     </div>
     <div
@@ -40,14 +55,12 @@
       [ngClass]="{invalid: form.get('amount')?.touched && form.get('amount')!.invalid}"
     >
       <label for="amount" class="form-label">Обсяг виплати:</label>
-      <input class="form-input" id="amount" type="text" formControlName="amount">
+      <input class="form-input" id="amount" type="text" formControlName="amount" [(ngModel)]="salary">
       <div
         *ngIf="form.get('amount')!.touched! && form.get('amount')!.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('amount')!.errors?.['required']">
           Введіть поле обсяг виплати
-        </small>
       </div>
     </div>
     <div
@@ -56,13 +69,18 @@
     >
       <label for="worker" class="form-label">Працівник:</label>
 
-      <select class="form-input" id="worker" formControlName="worker" [(ngModel)]="workerId">
+      <select class="form-input" id="worker" formControlName="worker" (change)="getSalary()" [(ngModel)]="workerId">
         <option [ngValue]="null" disabled>Оберіть працівника</option>
         <option *ngFor="let worker of workers" [ngValue]="worker.id">
           {{worker.firstName}} {{worker.lastName}}
         </option>
       </select>
-
+      <div
+        *ngIf="form.get('worker')?.touched! && form.get('worker')?.invalid"
+        class="validation"
+      >
+        Оберіть працівника
+      </div>
     </div>
 
     <div class="button-section">

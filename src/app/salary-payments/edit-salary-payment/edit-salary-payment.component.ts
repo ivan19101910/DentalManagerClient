@@ -20,6 +20,7 @@ export class EditSalaryPaymentComponent implements OnInit, OnDestroy {
   wSub?: Subscription
   workerId?: number
   workers?: ShowWorker[]
+  salary?: number = 0
 
   constructor(
     private route: ActivatedRoute,
@@ -42,10 +43,20 @@ export class EditSalaryPaymentComponent implements OnInit, OnDestroy {
         worker: new FormControl(null, Validators.required),
       })
       this.workerId = payment.workerId
+      this.salary = payment.amount
     })
     this.wSub = this.workerService.getAll().subscribe(workers => {
       this.workers = workers;
     })
+  }
+  getSalary(): void{
+    if(this.form!.value.monthNumber && this.form!.value.year)
+    {
+      this.workerService.getSalaryById(this.workerId!, this.form!.value.monthNumber, this.form!.value.year).subscribe(salary =>{
+        this.salary = salary
+        this.form!.controls['amount'].setErrors(null)
+      })
+    }
   }
   submit(){
     if(this.form?.invalid){

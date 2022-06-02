@@ -24,7 +24,6 @@ export class AuthService{
   }
 
   logout(){
-    console.log("logout")
     this.setToken(null)
   }
 
@@ -47,7 +46,6 @@ export class AuthService{
 
   private setToken(response: AuthResponse | null){
     if(response){
-      console.log(response)
       localStorage.setItem("token", response.token)
       localStorage.setItem("id", response.id.toString())
     }

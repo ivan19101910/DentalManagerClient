@@ -36,7 +36,7 @@
         <td class="action-section">
           <div class="action-section-container">
             <svg class="edit-icon" [routerLink]="['/services', 'edit', service.id]" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 19h1.414l9.314-9.314-1.414-1.414L5 17.586V19zm16 2H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L9.243 19H21v2zM15.728 6.858l1.414 1.414 1.414-1.414-1.414-1.414-1.414 1.414z" fill="rgba(53,48,47,1)"/></svg>
-            <svg class="delete-icon" (click)="remove(service.id)" viewBox="0 0 24 24" width="32" height="32" ><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-4.586 6l1.768 1.768-1.414 1.414L12 15.414l-1.768 1.768-1.414-1.414L10.586 14l-1.768-1.768 1.414-1.414L12 12.586l1.768-1.768 1.414 1.414L13.414 14zM9 4v2h6V4H9z" fill="rgba(53,48,47,1)"/></svg>
+            <svg class="delete-icon" (click)="confirmDelete(service.id)" viewBox="0 0 24 24" width="32" height="32" ><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-4.586 6l1.768 1.768-1.414 1.414L12 15.414l-1.768 1.768-1.414-1.414L10.586 14l-1.768-1.768 1.414-1.414L12 12.586l1.768-1.768 1.414 1.414L13.414 14zM9 4v2h6V4H9z" fill="rgba(53,48,47,1)"/></svg>
           </div>
         </td>
       </tr>
@@ -52,10 +52,32 @@
                          nextLabel=""
                          (pageChange)="page = $event"></pagination-controls>
   </div>
-
+<!--<div class="confirmation-section">-->
+<!--  <p>Confirmation</p>-->
+<!--  <p>Confirmation</p>-->
+<!--  <p>Confirmation</p>-->
+<!--</div>-->
+  <div class="cover"
+       [ngStyle]="{
+      display: deleteConfirmation == true ? 'block' : 'none'
+    }">
+      <div class="form-wrapper">
+        <div class="card" >
+          <div class ="form-header">
+            <h2>Видалення послуги</h2>
+            <svg (click)="unconfirmDelete()"
+                 class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z" fill="rgba(53,48,47,1)"/></svg>
+          </div>
+          <p>
+            Ви впевнені, що хочете видалити послугу?
+          </p>
+          <div class="button-section">
+            <button
+                    class="form-submit-btn" (click)="remove(this.idForDelete)">Видалити</button>
+          </div>
+        </div>
+      </div>
+  </div>
 <ng-template #loader>
   <p class="text-center">Завантаження...</p>
 </ng-template>
-
-
-<!--        <th class="service-el-header" *ngFor="let category of categories">{{category.categoryName}}</th>-->

@@ -78,6 +78,7 @@ export class ShowWorkerComponent implements OnInit, OnDestroy {
   remove(id:number){
     this.dSub = this.workerService.remove(id).subscribe(() => {
       this.workers = this.workers!.filter(workers => workers.id !== id)
+      this.filteredWorkers = this.workers
     })
   }
 

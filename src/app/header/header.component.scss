@@ -44,6 +44,14 @@
 .plug{
   width: 10%
 }
+.authMsg{
+  margin: 0 100px 0 0;
+  align-items: flex-start;
+  padding: 20px;
+  color: white;
+  font-size: 36px;
+  display:flex;
+}
 /////////////////////////////////////
 //header{
 //  height: 100px;
@@ -139,6 +147,7 @@ header{
 .topmenu {
   background: #433633;
   height: 100px;
+
 }
 
 .items-wrapper a {
@@ -191,7 +200,8 @@ header{
   .topmenu {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    //justify-content: space-between;
+    justify-content: center;
   }
   .topmenu>div>li {
     position: relative;

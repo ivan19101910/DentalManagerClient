@@ -6,9 +6,8 @@
   color: #35302F;
 }
 .card{
-  margin-top: 20px;
-  width:40% ;
-  height: 420px;
+  margin-top: 10px;
+  height: 430px;
   border: solid 2px #35302F;
   border-radius: 50px;
   align-items: center;
@@ -54,9 +53,6 @@ h2{
   padding-left: 5px;
   width: 300px;
 }
-.form-control{
-  width: 300px;
-}
 .form-submit-btn{
   color: #35302F;
   background-color: #8F857D;
@@ -70,7 +66,6 @@ h2{
   cursor: pointer;
 }
 .button-section{
-  margin-top: 10px;
   justify-content: center;
   justify-self: flex-end;
   align-content: center;
@@ -79,3 +74,7 @@ h2{
   display: flex;
   width: 180px;
 }
+.form-control{
+  width: 300px;
+}
+

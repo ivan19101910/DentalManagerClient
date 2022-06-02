@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {SalaryPaymentService} from "../salary-payment.service";
 import {WorkerService} from "../../workers/worker.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-create-salary-payment',
@@ -23,7 +24,7 @@ export class CreateSalaryPaymentComponent implements OnDestroy {
   wSub?: Subscription
   workerId?: number
   workers?: ShowWorker[]
-  salary?: number
+  salary?: number = 0
 
   constructor(
     public auth: AuthService,
@@ -37,9 +38,16 @@ export class CreateSalaryPaymentComponent implements OnDestroy {
     })
 
     this.form = new FormGroup({
-      monthNumber: new FormControl(null, Validators.required),
-      year: new FormControl(null, Validators.required),
-      amount: new FormControl(null, Validators.required),
+      monthNumber: new FormControl(null, [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(12),
+        Validators.pattern(environment.PRICE_REGEX)]),
+      year: new FormControl(null, [
+        Validators.required,
+        Validators.min(2000),
+        Validators.pattern(environment.PRICE_REGEX)]),
+      amount: new FormControl(this.salary, Validators.required),
       worker: new FormControl(null, Validators.required),
     })
   }
@@ -61,9 +69,13 @@ export class CreateSalaryPaymentComponent implements OnDestroy {
     })
   }
   getSalary(): void{
-    this.workerService.getSalaryById(this.workerId!, this.form.value.monthNumber, this.form.value.year).subscribe(salary =>{
-      this.salary = salary
-    })
+    if(this.form.value.monthNumber && this.form.value.year)
+    {
+      this.workerService.getSalaryById(this.workerId!, this.form.value.monthNumber, this.form.value.year).subscribe(salary =>{
+        this.salary = salary
+        this.form.controls['amount'].setErrors(null)
+      })
+    }
   }
 
   ngOnDestroy(): void {

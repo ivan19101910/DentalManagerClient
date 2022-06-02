@@ -12,7 +12,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let payment of payments | paginate: { itemsPerPage: 10, currentPage: page}">
+      <tr *ngFor="let payment of payments | paginate: { itemsPerPage: 10, currentPage: page }">
         <td class="position-el">{{payment.transactionNumber}}</td>
         <td class="position-el">{{payment.workerName}}{{payment.workerSurname}}</td>
         <td class="position-el">{{payment.monthNumber}}</td>

@@ -15,6 +15,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {WorkerService} from "../worker.service";
 import {SchedulesService} from "../../schedules/schedule.service";
+import {sha256} from "js-sha256";
 
 @Component({
   selector: 'app-create-worker',
@@ -146,7 +147,6 @@ export class CreateWorkerComponent implements OnInit {
   }
 
   submit() {
-    console.log('submit')
     let officeId = this.offices!
       .find(val => val.address == this.form.value.officeAddress && val.cityName == this.form.value.city)!.id
     let positionId = this.positions!
@@ -165,7 +165,7 @@ export class CreateWorkerComponent implements OnInit {
       lastName: this.form.value.lastName,
       phoneNumber: this.form.value.phoneNumber,
       email: this.form.value.email,
-      password: this.form.value.password,
+      password: sha256(this.form.value.password),
       address: this.form.value.address,
       positionId: positionId,
       officeId: officeId,

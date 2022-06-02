@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../shared/interfaces";
 import {HttpClient} from "@angular/common/http";
+import {sha256} from "js-sha256";
 
 @Component({
   selector: 'app-auth',
@@ -37,19 +38,11 @@ export class AuthComponent implements OnInit {
   }
 
   submit(){
-    // this.auth.login().subscribe(() => {
-    //   this.router.navigate(['/patients'])
-    // })
-    console.log("here")
-    // if (this.form.invalid) {
-    //   return
-    // }
-
     this.submitted = true
 
     const user: User = {
       login: this.form.value.email,
-      password: this.form.value.password
+      password: sha256(this.form.value.password)
     }
     this.auth.login(user).subscribe(() => {
       this.form.reset()

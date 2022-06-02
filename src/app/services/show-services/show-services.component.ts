@@ -23,6 +23,9 @@ export class ShowServicesComponent implements OnInit, OnDestroy {
   nameSearchField!: string
   typeSearchField!: string
   priceSearchField!: number
+  //for confirmation window
+  deleteConfirmation = false
+  idForDelete: number = 0
 //
 
   constructor(private serviceService: ServiceService) {
@@ -71,10 +74,22 @@ export class ShowServicesComponent implements OnInit, OnDestroy {
     }
   }
 
+  confirmDelete(id:number){
+    this.deleteConfirmation = true;
+    this.idForDelete = id;
+  }
+  unconfirmDelete(){
+    this.deleteConfirmation = false;
+    this.idForDelete = 0;
+  }
+
   remove(id:number){
     this.dSub = this.serviceService.remove(id).subscribe(() => {
       this.services = this.services!.filter(services => services.id !== id)
       this.filteredServices = this.filteredServices!.filter(services => services.id !== id)
+
+      this.deleteConfirmation = false;
+      this.idForDelete = 0;
     })
   }
 

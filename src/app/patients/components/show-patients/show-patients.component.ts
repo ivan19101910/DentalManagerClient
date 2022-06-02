@@ -68,6 +68,7 @@ export class ShowPatientsComponent implements OnInit, OnDestroy {
   remove(id:number){
     this.dSub = this.patientService.remove(id).subscribe(() => {
       this.patients = this.patients!.filter(patients => patients.id !== id)
+      this.filteredPatients = this.patients
     })
   }
 
